@@ -1,5 +1,3 @@
-# coding: utf-8
-
 import sys, os, time, gc, json
 from torch.optim import Adam
 
@@ -25,12 +23,12 @@ start_time = time.time()
 train_path = os.path.join(args.dataroot, 'train.json')
 dev_path = os.path.join(args.dataroot, 'development.json')
 Example.configuration(args.dataroot, train_path=train_path, word2vec_path=args.word2vec_path)
-train_dataset = Example.load_dataset(train_path)
-dev_dataset = Example.load_dataset(dev_path)
+train_dataset = Example.load_dataset(train_path) 
+dev_dataset = Example.load_dataset(dev_path) # ? 测试数据集
 print("Load dataset and database finished, cost %.4fs ..." % (time.time() - start_time))
 print("Dataset size: train -> %d ; dev -> %d" % (len(train_dataset), len(dev_dataset)))
 
-args.vocab_size = Example.word_vocab.vocab_size
+args.vocab_size = Example.word_vocab.vocab_size 
 args.pad_idx = Example.word_vocab[PAD]
 args.num_tags = Example.label_vocab.num_tags
 args.tag_pad_idx = Example.label_vocab.convert_tag_to_idx(PAD)
@@ -70,7 +68,7 @@ def decode(choice):
             labels.extend(label)
             total_loss += loss
             count += 1
-        metrics = Example.evaluator.acc(predictions, labels)
+        metrics = Example.evaluator.acc(predictions, labels) # acc 是正确预测回合对话 slot-value,需要每一个slot-value正确才算正确
     torch.cuda.empty_cache()
     gc.collect()
     return metrics, total_loss / count
