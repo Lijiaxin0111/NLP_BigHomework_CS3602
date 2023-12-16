@@ -4,6 +4,7 @@ import torch.nn as nn
 import torch.nn.utils.rnn as rnn_utils
 
 
+
 class SLUTagging(nn.Module):
 
     def __init__(self, config):
@@ -22,8 +23,8 @@ class SLUTagging(nn.Module):
         lengths = batch.lengths # batch里面每个句子的长度
 
         embed = self.word_embed(input_ids) #  embed: bsize,  tag_mlen, |V|     这里得看看input_ids的维度  idx -> embed
-        packed_inputs = rnn_utils.pack_padded_sequence(embed, lengths, batch_first=True, enforce_sorted=True) # 把batch里面的所有数据embed 连接起来, (总字数, embed_size)
-        packed_rnn_out, h_t_c_t = self.rnn(packed_inputs)  # bsize x seqlen x dim ?? 这一步的实现是怎么样的呢
+        packed_inputs = rnn_utils.pack_padded_sequence(embed, lengths, batch_first=True, enforce_sorted=True) # 把batch里面的所有数据embed 连接起来, (总字数, embed_size),为了方便RNN处理序列
+        packed_rnn_out, h_t_c_t = self.rnn(packed_inputs)  # bsize x seqlen x dim
         rnn_out, unpacked_len = rnn_utils.pad_packed_sequence(packed_rnn_out, batch_first=True) #
         hiddens = self.dropout_layer(rnn_out)
         tag_output = self.output_layer(hiddens, tag_mask, tag_ids) # 

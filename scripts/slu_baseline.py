@@ -10,6 +10,9 @@ from utils.example import Example
 from utils.batch import from_example_list
 from utils.vocab import PAD
 from model.slu_baseline_tagging import SLUTagging
+import tensorboard
+from torch.utils.tensorboard import SummaryWriter
+import tqdm
 
 # initialization params, output path, logger, random seed and torch.device
 args = init_args(sys.argv[1:])
@@ -34,7 +37,10 @@ args.num_tags = Example.label_vocab.num_tags
 args.tag_pad_idx = Example.label_vocab.convert_tag_to_idx(PAD)
 
 
+
+
 model = SLUTagging(args).to(device)
+writer = SummaryWriter(r"logs\CRF_LSTM")
 Example.word2vec.load_embeddings(model.word_embed, Example.word_vocab, device=device)
 
 if args.testing:
@@ -103,6 +109,7 @@ if not args.testing:
     nsamples, best_result = len(train_dataset), {'dev_acc': 0., 'dev_f1': 0.}
     train_index, step_size = np.arange(nsamples), args.batch_size
     print('Start training ......')
+
     for i in range(args.max_epoch):
         start_time = time.time()
         epoch_loss = 0
@@ -118,6 +125,8 @@ if not args.testing:
             optimizer.step()
             optimizer.zero_grad()
             count += 1
+
+
         print('Training: \tEpoch: %d\tTime: %.4f\tTraining Loss: %.4f' % (i, time.time() - start_time, epoch_loss / count))
         torch.cuda.empty_cache()
         gc.collect()
@@ -125,6 +134,13 @@ if not args.testing:
         start_time = time.time()
         metrics, dev_loss = decode('dev')
         dev_acc, dev_fscore = metrics['acc'], metrics['fscore']
+        # 增加一个tensorboard 输出
+        writer.add_scalar("epoch_loss", epoch_loss / count, i)
+        writer.add_scalar("dev_acc", dev_acc, i)  
+        writer.add_scalar("dev_precision",dev_fscore['precision'], i)    
+        writer.add_scalar("dev_recall", dev_fscore['recall'], i)   
+        writer.add_scalar("dev_fscore",  dev_fscore['fscore'], i)      
+
         print('Evaluation: \tEpoch: %d\tTime: %.4f\tDev acc: %.2f\tDev fscore(p/r/f): (%.2f/%.2f/%.2f)' % (i, time.time() - start_time, dev_acc, dev_fscore['precision'], dev_fscore['recall'], dev_fscore['fscore']))
         if dev_acc > best_result['dev_acc']:
             best_result['dev_loss'], best_result['dev_acc'], best_result['dev_f1'], best_result['iter'] = dev_loss, dev_acc, dev_fscore, i
@@ -141,3 +157,4 @@ else:
     dev_acc, dev_fscore = metrics['acc'], metrics['fscore']
     predict()
     print("Evaluation costs %.2fs ; Dev loss: %.4f\tDev acc: %.2f\tDev fscore(p/r/f): (%.2f/%.2f/%.2f)" % (time.time() - start_time, dev_loss, dev_acc, dev_fscore['precision'], dev_fscore['recall'], dev_fscore['fscore']))
+

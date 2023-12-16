@@ -1,6 +1,12 @@
 #-*- coding:utf-8 -*-
 import torch
 
+# batch : utt -- asr的解析结果
+#         lengths  -- 最长的input长度
+#         input_ids  -- 把input_idx 对齐 (Bsize, max_lengths)
+#         labels  --  act-slot-value列表  
+#         tag_ids   -- 把tag_idx 对齐  (Bsize, max_tag_len)
+#         tag_mesk  -- 把PD 的位置设置为0 
 
 def from_example_list(args, ex_list, device='cpu', train=True):
     ex_list = sorted(ex_list, key=lambda x: len(x.input_idx), reverse=True)
@@ -8,7 +14,7 @@ def from_example_list(args, ex_list, device='cpu', train=True):
     pad_idx = args.pad_idx
     tag_pad_idx = args.tag_pad_idx
 
-    batch.utt = [ex.utt for ex in ex_list]
+    batch.utt = [ex.utt for ex in ex_list] 
     input_lens = [len(ex.input_idx) for ex in ex_list]
     max_len = max(input_lens)
     input_ids = [ex.input_idx + [pad_idx] * (max_len - len(ex.input_idx)) for ex in ex_list]
