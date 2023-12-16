@@ -71,8 +71,6 @@ class CRF_LSTM_BERT(nn.Module):
         hiddens = self.dropout_layer(rnn_out)
         state = self.hidden_to_tag_layer(hiddens) 
 
-
-
         # print( self.crf.decode(state,tag_mask==1))
 
         if tag_ids == None:
