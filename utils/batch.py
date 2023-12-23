@@ -1,5 +1,8 @@
 #-*- coding:utf-8 -*-
 import torch
+import random
+from utils.data_augment import data_augment_example
+
 
 # batch : utt -- asr的解析结果
 #         lengths  -- 最长的input长度
@@ -8,9 +11,10 @@ import torch
 #         tag_ids   -- 把tag_idx 对齐  (Bsize, max_tag_len)
 #         tag_mesk  -- 把PD 的位置设置为0 
 
-def from_example_list(args, ex_list, device='cpu', train=True):
+def from_example_list(args, ex_list, device='cpu', train=True, aug_ratio = 0):
+    ex_list = [data_augment_example(ex, aug_ratio) for ex in ex_list]
     ex_list = sorted(ex_list, key=lambda x: len(x.input_idx), reverse=True)
-    batch = Batch(ex_list, device)
+    batch =  Batch(ex_list, device)
     pad_idx = args.pad_idx
     tag_pad_idx = args.tag_pad_idx
 
@@ -39,6 +43,11 @@ def from_example_list(args, ex_list, device='cpu', train=True):
 
     return batch
 
+
+
+
+
+    
 
 class Batch():
 
