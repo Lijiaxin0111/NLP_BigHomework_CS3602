@@ -133,6 +133,7 @@ if not args.testing:
         metrics, dev_loss = decode('dev')
         dev_acc, dev_fscore = metrics['acc'], metrics['fscore']
         writer.add_scalar("epoch_loss", epoch_loss / count, i)
+        writer.add_scalar("dev_loss", dev_loss, i)  
         writer.add_scalar("dev_acc", dev_acc, i)  
         writer.add_scalar("dev_precision",dev_fscore['precision'], i)    
         writer.add_scalar("dev_recall", dev_fscore['recall'], i)   

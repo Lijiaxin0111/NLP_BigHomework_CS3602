@@ -24,7 +24,6 @@ from transformers import AutoTokenizer, AutoModelForTokenClassification
 # freeze_layer_num 冻结的BERT层数
 # or 是否使用logits
 
-
 class CRF_LSTM_BERT(nn.Module):
 
     def __init__(self, config):

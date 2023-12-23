@@ -141,6 +141,7 @@ if not args.testing:
         writer.add_scalar("dev_precision",dev_fscore['precision'], i)    
         writer.add_scalar("dev_recall", dev_fscore['recall'], i)   
         writer.add_scalar("dev_fscore",  dev_fscore['fscore'], i)      
+        writer.add_scalar("dev_loss", dev_loss, i)  
 
         print('Evaluation: \tEpoch: %d\tTime: %.4f\tDev acc: %.2f\tDev fscore(p/r/f): (%.2f/%.2f/%.2f)' % (i, time.time() - start_time, dev_acc, dev_fscore['precision'], dev_fscore['recall'], dev_fscore['fscore']))
         if dev_acc > best_result['dev_acc']:
