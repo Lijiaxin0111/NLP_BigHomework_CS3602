@@ -4,7 +4,8 @@ import torch.nn as nn
 import torch.nn.utils.rnn as rnn_utils
 from torchcrf import CRF  # pytorch-crf包提供了一个CRF层的PyTorch版本实现
 
-
+# 这里可以调整的超参：
+# lr: 1e-5
 class CRF_LSTM(nn.Module):
 
     def __init__(self, config):
@@ -40,7 +41,7 @@ class CRF_LSTM(nn.Module):
 
         if tag_ids == None:
             pred = self.crf.decode(state,tag_mask==1) # 解码对应的标签
-            return pred
+            return (pred, )
         else:
 
             tag_loss = -1 * (   self.crf(state,tag_ids, tag_mask == 1)) # 增加了scf层
@@ -58,6 +59,9 @@ class CRF_LSTM(nn.Module):
             # 得到最大的那个idx
             # pred = torch.argmax(prob[i], dim=-1).cpu().tolist()
             pred = tag_list[i]
+            # if type(pred) == int:
+            #     pred = [pred]
+            # print("pred:",pred)
             pred_tuple = []
             idx_buff, tag_buff, pred_tags = [], [], []
             # pred = pred[:len(batch.utt[i])]
@@ -84,6 +88,7 @@ class CRF_LSTM(nn.Module):
             return predictions 
         else:
             loss = output[1]
+            
             return predictions, labels, loss.cpu().item()
 
 

@@ -9,7 +9,7 @@ from utils.initialization import *
 from utils.example import Example
 from utils.batch import from_example_list
 from utils.vocab import PAD
-from model.slu_baseline_tagging import SLUTagging
+from model.Pure_BERT import Pure_BERT
 import tensorboard
 from torch.utils.tensorboard import SummaryWriter
 import tqdm
@@ -37,11 +37,10 @@ args.num_tags = Example.label_vocab.num_tags
 args.tag_pad_idx = Example.label_vocab.convert_tag_to_idx(PAD)
 
 
-# 这里补充了保存loss 还有准确率到logs,以及保存checkpoints、test的时候导入pre_load 的初始化
-expr_name = f"slu_baseline_lr_{args.lr}"
-model = SLUTagging(args).to(device)
+expr_name = f"Pure_BERT_lr_{args.lr}_freeze_layer_{args.freeze_layer_num}"
+model = Pure_BERT(args).to(device)
 writer = SummaryWriter(os.path.join("logs",expr_name))
-Example.word2vec.load_embeddings(model.word_embed, Example.word_vocab, device=device)
+# Example.word2vec.load_embeddings(model.word_embed, Example.word_vocab, device=device)
 
 if args.testing:
     # 这里稍微修改了preload的路径
@@ -110,7 +109,6 @@ if not args.testing:
     nsamples, best_result = len(train_dataset), {'dev_acc': 0., 'dev_f1': 0.}
     train_index, step_size = np.arange(nsamples), args.batch_size
     print('Start training ......')
-
     for i in range(args.max_epoch):
         start_time = time.time()
         epoch_loss = 0
@@ -126,8 +124,7 @@ if not args.testing:
             optimizer.step()
             optimizer.zero_grad()
             count += 1
-
-
+            # print(j)
         print('Training: \tEpoch: %d\tTime: %.4f\tTraining Loss: %.4f' % (i, time.time() - start_time, epoch_loss / count))
         torch.cuda.empty_cache()
         gc.collect()
@@ -135,12 +132,11 @@ if not args.testing:
         start_time = time.time()
         metrics, dev_loss = decode('dev')
         dev_acc, dev_fscore = metrics['acc'], metrics['fscore']
-        # 增加一个tensorboard 输出
         writer.add_scalar("epoch_loss", epoch_loss / count, i)
         writer.add_scalar("dev_acc", dev_acc, i)  
         writer.add_scalar("dev_precision",dev_fscore['precision'], i)    
         writer.add_scalar("dev_recall", dev_fscore['recall'], i)   
-        writer.add_scalar("dev_fscore",  dev_fscore['fscore'], i)      
+        writer.add_scalar("dev_fscore",  dev_fscore['fscore'], i)     
 
         print('Evaluation: \tEpoch: %d\tTime: %.4f\tDev acc: %.2f\tDev fscore(p/r/f): (%.2f/%.2f/%.2f)' % (i, time.time() - start_time, dev_acc, dev_fscore['precision'], dev_fscore['recall'], dev_fscore['fscore']))
         if dev_acc > best_result['dev_acc']:
@@ -158,4 +154,3 @@ else:
     dev_acc, dev_fscore = metrics['acc'], metrics['fscore']
     predict()
     print("Evaluation costs %.2fs ; Dev loss: %.4f\tDev acc: %.2f\tDev fscore(p/r/f): (%.2f/%.2f/%.2f)" % (time.time() - start_time, dev_loss, dev_acc, dev_fscore['precision'], dev_fscore['recall'], dev_fscore['fscore']))
-
