@@ -1,101 +1,128 @@
-import json
 
-from utils.vocab import Vocab, LabelVocab
-from utils.word2vec import Word2vecUtils
-from utils.evaluator import Evaluator
-import os 
+from utils.example import Example
+import json 
+import os
+import random
+import re
+
 '''
  数据增强：对出现在slot中的值，在ontology寻找相同slot的近义词进行替换
- - poi_name.txt 在./lexicon/poi_name.txt 针对某个单词寻找意思相近的 5 个 同义词进行替换
+
+ - poi\终点\起点 名称\目标 :   在./lexicon/poi_name.txt随机选词进行替换
+
  - 请求类型: 除了定位之外的词, 任意替换
  - 路线偏好： 任意替换
  - 序列号: 对数字随机替换
  - 页码： 相互替换
  
 
- - 操作: 
- - 对象：
+ - 操作： 暂不替换
+ - 对象： 暂不替换
+ - poi\终点\起点： 暂不替换
  
 '''
 
 
 
-class data_augment():
-
-    def __init__(self, train_path = None, ontology_path = "C:\Users\li_jiaxin\Desktop\自然语言处理\Project\NLP_BigHomework\data\ontology.json", data_root = "C:\Users\li_jiaxin\Desktop\自然语言处理\Project\NLP_BigHomework\data"):
-        data_augment_path = os.path.join(data_root, "train_data_augment.json")
-
-
-        with open(train_path) as train_file:
-            train_data = json.load(train_file)
-
-        with open(ontology_path) as ontology_file:
-            ontology_data = json.load(ontology_file)
-
-    def random_subtitute_num(example:list):
-        new_examples = []
-        for 
+AUGMENT_SLOT = ["请求类型","路线偏好","序列号","页码",
+                "poi名称","poi修饰","poi目标","起点名称","起点修饰","起点目标","终点名称","终点修饰","终点目标","途经点名称"]
+data_root = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) , "data" )
 
 
+with open(os.path.join(data_root, "ontology.json"), "rb",) as onto_file:
+    ontology_slot = json.load(onto_file)["slots"]
+
+with open(os.path.join(  os.path.join(data_root, "lexicon"),"poi_name.txt"), "rt",encoding='UTF-8') as name_file:
+    names = name_file.readlines()
 
 
-        
-        
+def get_new_num(input_string):
+    # 定义正则表达式匹配模式
+    pattern = r'([一二三四五六七八九])'
+
+    # 使用正则表达式找到匹配的数字
+    matches = re.findall(pattern, input_string)
+
+    # 将匹配的数字进行随机替换
+    for match in matches:
+        # 获取替换的数字
+        replacements = ['一', '二', '三', '四', '五', '六', '七', '八', '九']
+        replacements.remove(match)  # 移除原数字，避免重复替换
+
+    replacement = random.choice(replacements)
+    return replacement, match
+
+     
 
 
-    @classmethod
-    def configuration(cls, root, train_path=None, word2vec_path=None):
-        cls.evaluator = Evaluator()
-        cls.word_vocab = Vocab(padding=True, unk=True, filepath=train_path)
-        cls.word2vec = Word2vecUtils(word2vec_path)
-        cls.label_vocab = LabelVocab(root)
 
-    @classmethod
-    def load_dataset(cls, data_path):
-        # 导入数据集中的预料
-        dataset = json.load(open(data_path, 'r',encoding='UTF-8'))
-        examples = []
-        # data 是一大轮的数据,里面可能还有多个回合的数据
-        for di, data in enumerate(dataset):
-            # utt 一回合的数据
-            for ui, utt in enumerate(data):
-                # 数据类:  Example() 
-                #         属性 ex 字典对应key有utt_id , manual_transcript, asr_1best , semantic : [act, slot, value] d;
-                #         属性 did 对应第几轮的第几回合的数据
-                #         属性 utt : asr_1best
-                #         属性 slot: 字典 : "act--slot" -> value
-                #         属性 tags :对应asr_1best 长度的 tag序列
-                #         属性  slotvalue: 这个数据的 act-slot-value列表
-                #         属性 input_idx: 得到对应每个asr_1best里面的单字的词表索引列表
-                #         属性 tag_id: 得到对应tags的索引号列表
-                ex = cls(utt, f'{di}-{ui}')
-                examples.append(ex)
-        return examples
 
-    def __init__(self, ex: dict, did):
-        super(Example_data_augment, self).__init__()
-        self.ex = ex
-        self.did = did
+def replace_masr(dict_utt , i, old, new ):
+    # i 是待replace的语义的索引
+    dict_utt["manual_transcript"] = dict_utt["manual_transcript"].replace(old, new)
+    dict_utt["asr_1best"] = dict_utt["asr_1best"].replace(old, new)
 
-        self.utt = ex['asr_1best']
-        # self.utt = ex['manual_transcript']
-        self.slot = {}
-        for label in ex['semantic']:
-            act_slot = f'{label[0]}-{label[1]}'
-            if len(label) == 3:
-                self.slot[act_slot] = label[2]
-        #初始化 tags
-        self.tags = ['O'] * len(self.utt)
-        for slot in self.slot:
-            value = self.slot[slot]
-            # 找到asr中对应value的位置
-            bidx = self.utt.find(value)
-            if bidx != -1:
-                # 把 asr对应value的位置标记为 I-act-slot
-                # 起始位置标记为 B-act-slot
-                self.tags[bidx: bidx + len(value)] = [f'I-{slot}'] * len(value)
-                self.tags[bidx] = f'B-{slot}'
-        self.slotvalue = [f'{slot}-{value}' for slot, value in self.slot.items()]
-        self.input_idx = [Example_data_augment.word_vocab[c] for c in self.utt]
-        l = Example_data_augment.label_vocab
-        self.tag_id = [l.convert_tag_to_idx(tag) for tag in self.tags]
+    dict_utt["semantic"][i][2] = dict_utt["semantic"][i][2].replace(old, new)
+
+def get_new_str(slot_idx, old_value):
+
+    if slot_idx[0] == "页码" or slot_idx[0] == "路线偏好" or slot_idx[0] == "请求类型":
+        res_values = ontology_slot[slot_idx[0]].copy()
+     
+        res_values.remove(old_value)
+        if slot_idx[0] == "请求类型":
+            
+            res_values.remove("定位")
+        return random.choice(res_values)
+
+
+
+    if  slot_idx[0] == "序列号":
+        return get_new_num(old_value)
+    
+    if  slot_idx[0]  in [ "poi名称","poi修饰","poi目标","起点名称","起点修饰","起点目标","终点名称","终点修饰","终点目标","途经点名称"]:
+        return random.choice(names)[:-1]
+    
+    
+
+
+
+
+def data_augment_example(example , aug_ratio = 0):
+
+    slot_idxs =  [(example.ex["semantic"][i][1], i) for i in range(len(example.ex["semantic"])) if example.ex["semantic"][i][1] in AUGMENT_SLOT and  example.ex["semantic"][i][2] != "定位" ]
+    # print([(example.ex["semantic"][i][2], i) for i in range(len(example.ex["semantic"])) ])
+
+    augment_ratio = aug_ratio
+    
+    tmp = random.random()
+
+
+    if len(slot_idxs) == 0 or tmp > augment_ratio:
+        return example
+    
+    augment_slot = random.sample(slot_idxs, k = 1 )[0]
+
+
+    new_value = get_new_str(augment_slot, example.ex["semantic"][augment_slot[1]][2])
+   
+
+    dict_utt = example.ex
+
+    if augment_slot[0] == "序列号":
+
+        replace_masr(dict_utt, augment_slot[1], new_value[1], new_value[0])
+
+    else:
+        replace_masr(dict_utt, augment_slot[1], example.ex["semantic"][augment_slot[1]][2] , new_value  )
+    
+
+    return Example(  dict_utt, example.did)
+    
+
+
+
+
+
+
+

@@ -37,7 +37,8 @@ args.num_tags = Example.label_vocab.num_tags
 args.tag_pad_idx = Example.label_vocab.convert_tag_to_idx(PAD)
 
 # 这里补充了保存loss 还有准确率到logs,以及保存checkpoints、test的时候导入pre_load 的初始化
-expr_name = f"CRF_LSTM_lr_{args.lr}"
+expr_name = f"CRF_LSTM_lr_{args.lr}_aug_{args.aug_ratio}"
+print("[EXPRI] ", expr_name)
 model = CRF_LSTM(args).to(device)
 writer = SummaryWriter(os.path.join("logs",expr_name))
 Example.word2vec.load_embeddings(model.word_embed, Example.word_vocab, device=device)
@@ -117,7 +118,8 @@ if not args.testing:
         count = 0
         for j in range(0, nsamples, step_size):
             cur_dataset = [train_dataset[k] for k in train_index[j: j + step_size]]
-            current_batch = from_example_list(args, cur_dataset, device, train=True)
+            # 这里增加了数据增强的ratio，只在训练的时候增加这个数据增强
+            current_batch = from_example_list(args, cur_dataset, device, train=True, aug_ratio= args.aug_ratio)
             output, loss = model(current_batch)
             epoch_loss += loss.item()
             loss.backward()

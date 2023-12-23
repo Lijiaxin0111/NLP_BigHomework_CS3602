@@ -37,7 +37,8 @@ args.num_tags = Example.label_vocab.num_tags
 args.tag_pad_idx = Example.label_vocab.convert_tag_to_idx(PAD)
 
 
-expr_name = f"Pure_BERT_lr_{args.lr}_freeze_layer_{args.freeze_layer_num}"
+expr_name = f"Pure_BERT_lr_{args.lr}_freeze_layer_{args.freeze_layer_num}_aug_{args.aug_ratio}"
+print("[EXPRE] ",expr_name)
 model = Pure_BERT(args).to(device)
 writer = SummaryWriter(os.path.join("logs",expr_name))
 # Example.word2vec.load_embeddings(model.word_embed, Example.word_vocab, device=device)
@@ -117,7 +118,8 @@ if not args.testing:
         count = 0
         for j in range(0, nsamples, step_size):
             cur_dataset = [train_dataset[k] for k in train_index[j: j + step_size]]
-            current_batch = from_example_list(args, cur_dataset, device, train=True)
+            # 这里增加了数据增强的ratio，只在训练的时候增加这个数据增强
+            current_batch = from_example_list(args, cur_dataset, device, train=True, aug_ratio= args.aug_ratio)
             output, loss = model(current_batch)
             epoch_loss += loss.item()
             loss.backward()

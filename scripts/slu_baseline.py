@@ -18,6 +18,7 @@ import tqdm
 args = init_args(sys.argv[1:])
 set_random_seed(args.seed)
 device = set_torch_device(args.device)
+
 print("Initialization finished ...")
 print("Random seed is set to %d" % (args.seed))
 print("Use GPU with index %s" % (args.device) if args.device >= 0 else "Use CPU as target torch device")
@@ -38,7 +39,8 @@ args.tag_pad_idx = Example.label_vocab.convert_tag_to_idx(PAD)
 
 
 # 这里补充了保存loss 还有准确率到logs,以及保存checkpoints、test的时候导入pre_load 的初始化
-expr_name = f"slu_baseline_lr_{args.lr}"
+expr_name = f"slu_baseline_lr_{args.lr}_aug_{args.aug_ratio}"
+print("[EXPRIMENT] ",expr_name)
 model = SLUTagging(args).to(device)
 writer = SummaryWriter(os.path.join("logs",expr_name))
 Example.word2vec.load_embeddings(model.word_embed, Example.word_vocab, device=device)
@@ -66,6 +68,7 @@ def decode(choice):
     with torch.no_grad():
         for i in range(0, len(dataset), args.batch_size):
             cur_dataset = dataset[i: i + args.batch_size]
+            # 这里增加了一个 数据增强的比例, 有三个地方要加
             current_batch = from_example_list(args, cur_dataset, device, train=True)
             pred, label, loss = model.decode(Example.label_vocab, current_batch)
             for j in range(len(current_batch)):
@@ -119,7 +122,8 @@ if not args.testing:
         count = 0
         for j in range(0, nsamples, step_size):
             cur_dataset = [train_dataset[k] for k in train_index[j: j + step_size]]
-            current_batch = from_example_list(args, cur_dataset, device, train=True)
+            # 这里增加了数据增强的ratio，只在训练的时候增加这个数据增强
+            current_batch = from_example_list(args, cur_dataset, device, train=True, aug_ratio= args.aug_ratio)
             output, loss = model(current_batch)
             epoch_loss += loss.item()
             loss.backward()

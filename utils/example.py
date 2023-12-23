@@ -3,6 +3,9 @@ import json
 from utils.vocab import Vocab, LabelVocab
 from utils.word2vec import Word2vecUtils
 from utils.evaluator import Evaluator
+import random
+import os
+import re
 
 class Example():
 
@@ -39,6 +42,7 @@ class Example():
         super(Example, self).__init__()
         self.ex = ex
         self.did = did
+        
 
         self.utt = ex['asr_1best']
         # self.utt = ex['manual_transcript']
@@ -62,3 +66,6 @@ class Example():
         self.input_idx = [Example.word_vocab[c] for c in self.utt]
         l = Example.label_vocab
         self.tag_id = [l.convert_tag_to_idx(tag) for tag in self.tags]
+
+
+
