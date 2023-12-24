@@ -39,7 +39,7 @@ args.tag_pad_idx = Example.label_vocab.convert_tag_to_idx(PAD)
 
 
 # 这里补充了保存loss 还有准确率到logs,以及保存checkpoints、test的时候导入pre_load 的初始化
-expr_name = f"slu_baseline_lr_{args.lr}_aug_{args.aug_ratio}"
+expr_name = f"slu_baseline_lr_{args.lr}_aug_{args.aug_ratio}_new_aug"
 print("[EXPRIMENT] ",expr_name)
 model = SLUTagging(args).to(device)
 writer = SummaryWriter(os.path.join("logs",expr_name))
@@ -68,7 +68,7 @@ def decode(choice):
     with torch.no_grad():
         for i in range(0, len(dataset), args.batch_size):
             cur_dataset = dataset[i: i + args.batch_size]
-            # 这里增加了一个 数据增强的比例, 有三个地方要加
+            
             current_batch = from_example_list(args, cur_dataset, device, train=True)
             pred, label, loss = model.decode(Example.label_vocab, current_batch)
             for j in range(len(current_batch)):
@@ -145,6 +145,7 @@ if not args.testing:
         writer.add_scalar("dev_precision",dev_fscore['precision'], i)    
         writer.add_scalar("dev_recall", dev_fscore['recall'], i)   
         writer.add_scalar("dev_fscore",  dev_fscore['fscore'], i)      
+        writer.add_scalar("dev_loss", dev_loss, i)  
 
         print('Evaluation: \tEpoch: %d\tTime: %.4f\tDev acc: %.2f\tDev fscore(p/r/f): (%.2f/%.2f/%.2f)' % (i, time.time() - start_time, dev_acc, dev_fscore['precision'], dev_fscore['recall'], dev_fscore['fscore']))
         if dev_acc > best_result['dev_acc']:

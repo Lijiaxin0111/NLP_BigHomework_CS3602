@@ -4,7 +4,22 @@
 
 
 
+  
 # Dev Log
+
+## 1224
+###  数据增强 ljx: 
+ - 测试数据增强,  以及实现没有dev集数据泄露的数据增强
+ - 完成上述模型和 baseline在不同lr下的性能比较
+ - 性能对比详见`Aug_ratio 测试.md`
+
+
+## 1217
+###  基本模型测试 ljx: 
+ - 实现 CRF_LSTM_BERT   CRF_LSTM Pure_BERT
+ - 完成上述模型和 baseline在不同lr下的性能比较
+
+
 ## 1217
 ### Learning ASR-Robust Contextualized Embeddings for Spoken Language Understanding
 * https://arxiv.org/abs/1909.10861
