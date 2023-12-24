@@ -5,7 +5,7 @@ test_model = ["slu_baseline.py --lr 1e-3","CRF_LSTM.py  --lr 1e-3 ","Pure_BERT.p
 
 test_aug_ratio = ["0.3","0.5","0.7", "1"]
 
-model = test_model[0]
+model = test_model[3]
 for aug_ratio in test_aug_ratio :
     print("model:" ,model, "aug_ratio",aug_ratio)
     command = f"/bin/python scripts/{model} --aug_ratio {aug_ratio}"

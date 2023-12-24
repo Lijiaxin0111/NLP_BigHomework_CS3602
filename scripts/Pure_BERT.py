@@ -37,7 +37,7 @@ args.num_tags = Example.label_vocab.num_tags
 args.tag_pad_idx = Example.label_vocab.convert_tag_to_idx(PAD)
 
 
-expr_name = f"Pure_BERT_lr_{args.lr}_freeze_layer_{args.freeze_layer_num}_aug_{args.aug_ratio}"
+expr_name = f"Pure_BERT_lr_{args.lr}_freeze_layer_{args.freeze_layer_num}_aug_{args.aug_ratio}_new_aug"
 print("[EXPRE] ",expr_name)
 model = Pure_BERT(args).to(device)
 writer = SummaryWriter(os.path.join("logs",expr_name))

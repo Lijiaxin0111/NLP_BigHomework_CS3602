@@ -37,7 +37,7 @@ args.num_tags = Example.label_vocab.num_tags
 args.tag_pad_idx = Example.label_vocab.convert_tag_to_idx(PAD)
 
 # 这里补充了保存loss 还有准确率到logs,以及保存checkpoints、test的时候导入pre_load 的初始化
-expr_name = f"CRF_LSTM_lr_{args.lr}_aug_{args.aug_ratio}"
+expr_name = f"CRF_LSTM_lr_{args.lr}_aug_{args.aug_ratio}_new_aug"
 print("[EXPRI] ", expr_name)
 model = CRF_LSTM(args).to(device)
 writer = SummaryWriter(os.path.join("logs",expr_name))

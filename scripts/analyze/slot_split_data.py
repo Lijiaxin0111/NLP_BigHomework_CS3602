@@ -46,22 +46,24 @@ args.tag_pad_idx = Example.label_vocab.convert_tag_to_idx(PAD)
 
 expr_name = f"Analy_impossible_case_ratio"
 print("[EXPRI] ", expr_name)
-dataset = dev_dataset
+dataset = train_dataset
 cnt = 0
-impossible_case = []
+train_split = {}
 
 
 for i in range(0, len(dataset)):
     ex = dataset[i].ex
     # print(ex)
+
     for  label in ex['semantic']:
-        if label[2] not in ex["asr_1best"]:
-            cnt += 1
-            impossible_case.append([ex])
-            break
-    # print("DONE")
-print(impossible_case)
+        #
+        train_split[label[1]] = train_split.get(label[1], []) + [label[2]]
+for key in train_split.keys():
+    train_split[key] = list(  set(train_split[key]))
+print(train_split)
+json.dump(train_split, open( "train_split.json", 'wt',encoding='utf-8'), indent=4, ensure_ascii=False)
+print("write finished")
 
-print("impossible_case_ratio: ", cnt / len(dataset))
 
 
+# print("impossible_case_ratio: ", cnt / len(dataset))

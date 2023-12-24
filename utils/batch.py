@@ -1,7 +1,8 @@
 #-*- coding:utf-8 -*-
 import torch
 import random
-from utils.data_augment import data_augment_example
+# from utils.data_augment import data_augment_example
+from utils.data_augment_new import data_augment_example
 
 
 # batch : utt -- asr的解析结果

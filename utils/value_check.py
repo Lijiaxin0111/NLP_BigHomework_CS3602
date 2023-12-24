@@ -6,19 +6,7 @@ import random
 import re
 
 '''
- 数据增强：对出现在slot中的值，在ontology寻找相同slot的近义词进行替换
-
- - poi\终点\起点 名称\目标\修饰 :   在./lexicon/poi_name.txt随机选词进行替换
-
- - 请求类型: 除了定位之外的词, 任意替换
- - 路线偏好： 任意替换
- - 序列号: 对数字随机替换
- - 页码： 相互替换
- 
-
- - 操作： 暂不替换
- - 对象： 暂不替换
-
+  value 检查
  
 '''
 
@@ -82,8 +70,6 @@ def get_new_str(slot_idx, old_value):
     
     if  slot_idx[0]  in [ "poi名称","poi修饰","poi目标","起点名称","起点修饰","起点目标","终点名称","终点修饰","终点目标","途经点名称"]:
         return random.choice(names)[:-1]
-    
-
     
     
 

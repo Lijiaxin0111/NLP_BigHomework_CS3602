@@ -10,8 +10,9 @@
 # 数据增强
 ## 1217
 ### 1217 ljx: 
- - 实现数据增强
+ - 测试数据增强,  以及实现没有dev集数据泄露的数据增强
  - 完成上述模型和 baseline在不同lr下的性能比较
+ - 性能对比详见`Aug_ratio 测试.md`
 
 # CRF_LSTM_BERT   CRF_LSTM Pure_BERT
 ## 1217

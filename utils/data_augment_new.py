@@ -8,7 +8,8 @@ import re
 '''
  数据增强：对出现在slot中的值，在ontology寻找相同slot的近义词进行替换
 
- - poi\终点\起点 名称\目标\修饰 :   在./lexicon/poi_name.txt随机选词进行替换
+ - poi\终点\起点 名称\目标\修饰 :   基于train_split中的数据进行随机替换
+ (考虑在./lexicon/poi_name.txt随机选词进行替换,可能导致数据development的数据泄露)
 
  - 请求类型: 除了定位之外的词, 任意替换
  - 路线偏好： 任意替换
@@ -18,7 +19,6 @@ import re
 
  - 操作： 暂不替换
  - 对象： 暂不替换
-
  
 '''
 
@@ -34,6 +34,12 @@ with open(os.path.join(data_root, "ontology.json"), "rb",) as onto_file:
 
 with open(os.path.join(  os.path.join(data_root, "lexicon"),"poi_name.txt"), "rt",encoding='UTF-8') as name_file:
     names = name_file.readlines()
+
+with open(os.path.join(  os.path.join(data_root, "lexicon"),"train_split.json"), "rb") as split_flie:
+    splits = json.load(split_flie)
+
+xiushi_keys = [key for key in splits.keys()]
+
 
 
 def get_new_num(input_string):
@@ -53,8 +59,6 @@ def get_new_num(input_string):
     return replacement, match
 
      
-
-
 
 
 def replace_masr(dict_utt , i, old, new ):
@@ -80,10 +84,15 @@ def get_new_str(slot_idx, old_value):
     if  slot_idx[0] == "序列号":
         return get_new_num(old_value)
     
-    if  slot_idx[0]  in [ "poi名称","poi修饰","poi目标","起点名称","起点修饰","起点目标","终点名称","终点修饰","终点目标","途经点名称"]:
-        return random.choice(names)[:-1]
-    
+    if slot_idx[0] in  [ "poi修饰","起点修饰","终点修饰"]:
+        xiushi_key = random.choice(xiushi_keys)
+        
 
+        return random.choice(splits[xiushi_key])
+    
+    if  slot_idx[0]  in [ "poi名称","poi修饰","poi目标","起点名称","起点修饰","起点目标","终点名称","终点修饰","终点目标","途经点名称"]:
+        
+        return  random.choice( splits[slot_idx[0]])
     
     
 
@@ -117,7 +126,8 @@ def data_augment_example(example , aug_ratio = 0):
 
     else:
         replace_masr(dict_utt, augment_slot[1], example.ex["semantic"][augment_slot[1]][2] , new_value  )
-    
+    # print("before " ,example.utt)
+    # print("after " , Example(  dict_utt, example.did).utt)
 
     return Example(  dict_utt, example.did)
     
