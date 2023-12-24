@@ -1,11 +1,13 @@
 {
     "configurations": [
+
         {
             "name": "Python: File",
             "type": "python",
             "request": "launch",
             "program": "${file}",
-            "justMyCode": true
+            "justMyCode": true , 
+            "args": "--device -1 --aug_ratio 0.5" 
         }
     ]
 }
