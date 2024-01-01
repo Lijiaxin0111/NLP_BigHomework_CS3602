@@ -114,7 +114,6 @@ def data_augment_example(example , aug_ratio = 0):
     
     augment_slot = random.sample(slot_idxs, k = 1 )[0]
 
-
     new_value = get_new_str(augment_slot, example.ex["semantic"][augment_slot[1]][2])
    
 

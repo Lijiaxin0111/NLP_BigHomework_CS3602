@@ -22,7 +22,7 @@ class Example():
     @classmethod
     def load_dataset(cls, data_path):
         # 导入数据集中的预料
-        dataset = json.load(open(data_path, 'r',encoding='UTF-8'))
+        dataset = json.load(open(data_path, "r",encoding="UTF-8"))
         examples = []
         # data 是一大轮的数据,里面可能还有多个回合的数据
         for di, data in enumerate(dataset):
@@ -37,7 +37,7 @@ class Example():
                 #         属性  slotvalue: 这个数据的 act-slot-value列表
                 #         属性 input_idx: 得到对应每个asr_1best里面的单字的词表索引列表
                 #         属性 tag_id: 得到对应tags的索引号列表
-                ex = cls(utt, f'{di}-{ui}')
+                ex = cls(utt, f"{di}-{ui}")
                 examples.append(ex)
         return examples
 
@@ -47,15 +47,15 @@ class Example():
         self.did = did
         
 
-        self.utt = ex['asr_1best']
-        # self.utt = ex['manual_transcript']
+        self.utt = ex["asr_1best"]
+        # self.utt = ex["manual_transcript"]
         self.slot = {}
-        for label in ex['semantic']:
-            act_slot = f'{label[0]}-{label[1]}'
+        for label in ex["semantic"]:
+            act_slot = f"{label[0]}-{label[1]}"
             if len(label) == 3:
                 self.slot[act_slot] = label[2]
         #初始化 tags
-        self.tags = ['O'] * len(self.utt)
+        self.tags = ["O"] * len(self.utt)
         for slot in self.slot:
             value = self.slot[slot]
             # 找到asr中对应value的位置
@@ -63,12 +63,13 @@ class Example():
             if bidx != -1:
                 # 把 asr对应value的位置标记为 I-act-slot
                 # 起始位置标记为 B-act-slot
-                self.tags[bidx: bidx + len(value)] = [f'I-{slot}'] * len(value)
-                self.tags[bidx] = f'B-{slot}'
-        self.slotvalue = [f'{slot}-{value}' for slot, value in self.slot.items()]
+                self.tags[bidx: bidx + len(value)] = [f"I-{slot}"] * len(value)
+                self.tags[bidx] = f"B-{slot}"
+        self.slotvalue = [f"{slot}-{value}" for slot, value in self.slot.items()]
         self.input_idx = [Example.word_vocab[c] for c in self.utt]
         l = Example.label_vocab
         self.tag_id = [l.convert_tag_to_idx(tag) for tag in self.tags]
+
 
 
 
