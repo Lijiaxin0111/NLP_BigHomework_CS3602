@@ -12,6 +12,7 @@ from utils.vocab import PAD
 from model.Pure_BERT import Pure_BERT
 import tensorboard
 from torch.utils.tensorboard import SummaryWriter
+from utils.premodified import modified_pred
 import tqdm
 
 # initialization params, output path, logger, random seed and torch.device
@@ -37,7 +38,7 @@ args.num_tags = Example.label_vocab.num_tags
 args.tag_pad_idx = Example.label_vocab.convert_tag_to_idx(PAD)
 
 
-expr_name = f"Pure_BERT_lr_{args.lr}_freeze_layer_{args.freeze_layer_num}_aug_{args.aug_ratio}_new_aug"
+expr_name = f"Pure_BERT_lr_{args.lr}_freeze_layer_{args.freeze_layer_num}_aug_{args.aug_ratio}_old_aug_modified_pinyin_{args.pinyin}_dis_{args.dis}"
 print("[EXPRE] ",expr_name)
 model = Pure_BERT(args).to(device)
 writer = SummaryWriter(os.path.join("logs",expr_name))
@@ -45,10 +46,9 @@ writer = SummaryWriter(os.path.join("logs",expr_name))
 
 if args.testing:
     # 这里稍微修改了preload的路径
-    # check_point = torch.load(open(os.path.join("checkpoints",expr_name), 'rb'), map_location=device)
-    check_point = torch.load(open(os.path.join("checkpoints","Pure_BERT_lr_0.001_freeze_layer_12"), 'rb'), map_location=device)
-
-
+    check_point = torch.load(open(os.path.join("checkpoints",expr_name), 'rb'), map_location=device)
+    # check_point = torch.load(open(os.path.join("checkpoints","Pure_BERT_lr_1e-05_freeze_layer_12_aug_0.3_old_aug_modified"), 'rb'), map_location=device)
+    
     model.load_state_dict(check_point['model'])
     print("Load saved model from root path")
 
@@ -71,10 +71,16 @@ def decode(choice):
             cur_dataset = dataset[i: i + args.batch_size]
             current_batch = from_example_list(args, cur_dataset, device, train=True)
             pred, label, loss = model.decode(Example.label_vocab, current_batch)
+
+            if choice == "dev":
+                pred = modified_pred(pred,distance= args.dis, pinyin= args.pinyin)
+                # pred = modified_pred(pred,distance= "lev", pinyin= ( True))
+
             for j in range(len(current_batch)):
                 if any([l.split('-')[-1] not in current_batch.utt[j] for l in pred[j]]):
                     print(current_batch.utt[j], pred[j], label[j])
             predictions.extend(pred)
+
             labels.extend(label)
             total_loss += loss
             count += 1

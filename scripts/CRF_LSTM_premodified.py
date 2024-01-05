@@ -9,9 +9,10 @@ from utils.initialization import *
 from utils.example import Example
 from utils.batch import from_example_list
 from utils.vocab import PAD
-from model.Pure_BERT import Pure_BERT
+from model.CRF_LSTM import  CRF_LSTM
 import tensorboard
 from torch.utils.tensorboard import SummaryWriter
+from utils.premodified import modified_pred
 import tqdm
 
 # initialization params, output path, logger, random seed and torch.device
@@ -36,19 +37,18 @@ args.pad_idx = Example.word_vocab[PAD]
 args.num_tags = Example.label_vocab.num_tags
 args.tag_pad_idx = Example.label_vocab.convert_tag_to_idx(PAD)
 
-
-expr_name = f"Pure_BERT_lr_{args.lr}_freeze_layer_{args.freeze_layer_num}_aug_{args.aug_ratio}_new_aug"
-print("[EXPRE] ",expr_name)
-model = Pure_BERT(args).to(device)
+# 这里补充了保存loss 还有准确率到logs,以及保存checkpoints、test的时候导入pre_load 的初始化
+expr_name = f"CRF_LSTM_lr_{args.lr}_aug_{args.aug_ratio}_old_aug_modified_pinyin_{args.pinyin}_dis_{args.dis}_test"
+print("[EXPRI] ", expr_name)
+model = CRF_LSTM(args).to(device)
 writer = SummaryWriter(os.path.join("logs",expr_name))
-# Example.word2vec.load_embeddings(model.word_embed, Example.word_vocab, device=device)
+Example.word2vec.load_embeddings(model.word_embed, Example.word_vocab, device=device)
 
 if args.testing:
     # 这里稍微修改了preload的路径
     # check_point = torch.load(open(os.path.join("checkpoints",expr_name), 'rb'), map_location=device)
-    check_point = torch.load(open(os.path.join("checkpoints","Pure_BERT_lr_0.001_freeze_layer_12"), 'rb'), map_location=device)
-
-
+    
+    check_point = torch.load(open(os.path.join("checkpoints","CRF_LSTM_lr_0.001_aug_0.3_old_aug_modified"), 'rb'), map_location=device)
     model.load_state_dict(check_point['model'])
     print("Load saved model from root path")
 
@@ -71,6 +71,10 @@ def decode(choice):
             cur_dataset = dataset[i: i + args.batch_size]
             current_batch = from_example_list(args, cur_dataset, device, train=True)
             pred, label, loss = model.decode(Example.label_vocab, current_batch)
+            if choice == "dev":
+                # pred = modified_pred(pred,distance= args.dis, pinyin= ( args.pinyin))
+                pred = modified_pred(pred,distance= "lev", pinyin= ( True))
+
             for j in range(len(current_batch)):
                 if any([l.split('-')[-1] not in current_batch.utt[j] for l in pred[j]]):
                     print(current_batch.utt[j], pred[j], label[j])
@@ -129,7 +133,6 @@ if not args.testing:
             optimizer.step()
             optimizer.zero_grad()
             count += 1
-            # print(j)
         print('Training: \tEpoch: %d\tTime: %.4f\tTraining Loss: %.4f' % (i, time.time() - start_time, epoch_loss / count))
         torch.cuda.empty_cache()
         gc.collect()
@@ -138,11 +141,11 @@ if not args.testing:
         metrics, dev_loss = decode('dev')
         dev_acc, dev_fscore = metrics['acc'], metrics['fscore']
         writer.add_scalar("epoch_loss", epoch_loss / count, i)
-        writer.add_scalar("dev_loss", dev_loss, i)  
         writer.add_scalar("dev_acc", dev_acc, i)  
         writer.add_scalar("dev_precision",dev_fscore['precision'], i)    
         writer.add_scalar("dev_recall", dev_fscore['recall'], i)   
-        writer.add_scalar("dev_fscore",  dev_fscore['fscore'], i)     
+        writer.add_scalar("dev_fscore",  dev_fscore['fscore'], i)   
+        writer.add_scalar("dev_loss", dev_loss, i)    
 
         print('Evaluation: \tEpoch: %d\tTime: %.4f\tDev acc: %.2f\tDev fscore(p/r/f): (%.2f/%.2f/%.2f)' % (i, time.time() - start_time, dev_acc, dev_fscore['precision'], dev_fscore['recall'], dev_fscore['fscore']))
         if dev_acc > best_result['dev_acc']:
