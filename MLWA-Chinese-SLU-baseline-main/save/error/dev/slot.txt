@@ -1,0 +1,2231 @@
+导	O	B-操作
+航	O	I操作
+到	O	O
+和	B-终点名称	B-终点名称
+田	I-终点名称	I-终点名称
+市	I-终点名称	I-终点名称
+公	I-终点名称	I-终点名称
+安	I-终点名称	I-终点名称
+局	I终点名称	I终点名称
+导航 到 和田市 公安局
+
+导	O	B-操作
+航	O	I操作
+洋	B-终点名称	B-终点名称
+浦	I-终点名称	I-终点名称
+大	I-终点名称	I-终点名称
+街	I-终点名称	I-终点名称
+与	I-终点名称	I-终点名称
+合	I-终点名称	I-终点名称
+肥	I-终点名称	I-终点名称
+路	I-终点名称	I-终点名称
+交	I-终点名称	I-终点名称
+汇	I终点名称	I终点名称
+导航 洋浦 大街 与 合肥 路 交汇
+
+导	O	B-操作
+航	O	I操作
+到	O	O
+华	B-终点名称	B-终点名称
+夏	I-终点名称	I-终点名称
+驾	I-终点名称	I-终点名称
+校	I终点名称	I终点名称
+导航 到 华夏 驾校
+
+你	B-操作	O
+导	B-对象	B-操作
+航	I对象	I操作
+你 导航
+
+附	B-请求类型	O
+近	I请求类型	O
+的	O	O
+奇	B-poi目标	O
+瑞	I-poi目标	B-poi目标
+四	I-poi目标	I-poi目标
+S	I-poi目标	I-poi目标
+店	Ipoi目标	Ipoi目标
+附近 的 奇瑞 四 S 店
+
+导	B-操作	B-操作
+航	B-对象	I操作
+#	I对象	I对象
+导航 #
+
+打	O	B-操作
+开	O	I操作
+导	O	B-对象
+航	O	I对象
+我	O	O
+要	O	O
+去	O	O
+林	B-终点名称	B-终点名称
+安	I-终点名称	I-终点名称
+物	I-终点名称	I-终点名称
+流	I-终点名称	I-终点名称
+园	I终点名称	I终点名称
+打开 导航 我 要 去 林安 物流园
+
+开	B-操作	B-操作
+始	I-操作	I操作
+导	I-操作	B-对象
+航	I操作	I对象
+开始 导航
+
+山	B-终点名称	B-poi名称
+水	I-终点名称	I-poi名称
+是	I-终点名称	I-poi名称
+市	I-终点名称	I-poi名称
+第	I-终点名称	I-poi名称
+二	I-终点名称	I-poi名称
+人	I-终点名称	I-poi名称
+民	I-终点名称	I-poi名称
+医	I-终点名称	I-poi名称
+院	I终点名称	I-poi名称
+怎	O	I-poi名称
+么	O	Ipoi名称
+走	O	O
+山水 是 市 第二 人民 医院 怎么 走
+
+去	O	O
+往	O	B-终点名称
+献	B-终点名称	I-终点名称
+县	I终点名称	I终点名称
+去往 献县
+
+导	O	O
+航	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	B-操作
+#	O	I操作
+导航 #######
+
+恶	O	O
+明	O	O
+路	O	O
+加	O	O
+油	O	O
+站	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	B-poi名称	O
+#	I-poi名称	O
+#	Ipoi名称	O
+恶明路 加油站 #######
+
+去	O	O
+附	B-请求类型	O
+近	I请求类型	O
+加	B-终点目标	B-poi目标
+油	I-终点目标	I-poi目标
+站	I终点目标	Ipoi目标
+去 附近 加油站
+
+导	O	B-操作
+航	O	I操作
+古	B-终点名称	B-终点名称
+井	I终点名称	I终点名称
+导航 古井
+
+到	O	O
+南	B-终点名称	O
+昌	I-终点名称	O
+的	I终点名称	O
+到 南昌 的
+
+回	O	B-poi名称
+澄	B-终点名称	I-poi名称
+迈	I-终点名称	I-poi名称
+县	I-终点名称	I-poi名称
+人	I-终点名称	I-poi名称
+民	I-终点名称	I-poi名称
+法	I-终点名称	I-poi名称
+院	I终点名称	Ipoi名称
+回 澄迈县 人民法院
+
+回	O	B-poi名称
+澄	B-终点名称	I-poi名称
+迈	I-终点名称	I-poi名称
+县	I-终点名称	I-poi名称
+电	I-终点名称	I-poi名称
+业	I-终点名称	I-poi名称
+局	I终点名称	Ipoi名称
+回 澄迈县 电业局
+
+回	O	O
+澄	O	B-终点名称
+迈	O	I-终点名称
+县	O	I-终点名称
+取	B-操作	I-终点名称
+消	I操作	I终点名称
+回 澄迈县 取消
+
+去	O	O
+上	O	O
+海	O	O
+佩	O	O
+的	O	O
+我	O	O
+要	O	O
+到	O	O
+宜	O	O
+昌	O	O
+街	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	B-终点名称	O
+#	I-终点名称	O
+#	I终点名称	O
+去 上海 佩 的 我 要 到 宜昌 街 ###########
+
+导	O	O
+航	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	B-操作
+#	O	I操作
+导航 #######
+
+不	O	O
+需	O	B-poi名称
+要	O	Ipoi名称
+不 需要
+
+金	B-poi名称	O
+堂	Ipoi名称	O
+金堂
+
+金	B-poi名称	O
+堂	Ipoi名称	O
+金堂
+
+成	O	O
+都	O	O
+的	O	O
+吉	B-poi目标	O
+田	Ipoi目标	O
+成都 的 吉田
+
+导	B-操作	B-操作
+航	I操作	I操作
+杨	B-终点名称	O
+利	I-终点名称	B-终点名称
+蛋	I-终点名称	I-终点名称
+糕	I-终点名称	I-终点名称
+坊	I终点名称	I终点名称
+导航 杨利 蛋糕 坊
+
+附	O	O
+近	O	O
+哪	O	O
+有	O	O
+好	B-poi名称	O
+吃	I-poi名称	B-poi目标
+的	Ipoi名称	Ipoi目标
+附近 哪 有 好吃 的
+
+到	O	O
+殡	O	O
+仪	O	O
+馆	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	B-poi名称	O
+#	I-poi名称	O
+#	Ipoi名称	O
+到 殡仪馆 ########
+
+导	O	B-操作
+航	O	I操作
+到	O	O
+山	O	B-终点名称
+区	O	I-终点名称
+财	O	I-终点名称
+政	O	I-终点名称
+宾	O	I-终点名称
+馆	O	I终点名称
+#	O	O
+#	O	O
+#	O	O
+#	B-终点名称	O
+#	I-终点名称	O
+#	I-终点名称	O
+#	I-终点名称	O
+#	I-终点名称	O
+#	I-终点名称	O
+#	I终点名称	O
+导航 到 山区 财政 宾馆 ##########
+
+导	O	B-操作
+航	O	I操作
+沙	B-终点名称	B-终点名称
+土	I-终点名称	I-终点名称
+镇	I-终点名称	I-终点名称
+新	I-终点名称	I-终点名称
+东	I-终点名称	I-终点名称
+方	I-终点名称	I-终点名称
+小	I-终点名称	I-终点名称
+学	I终点名称	I终点名称
+导航 沙土 镇 新东方 小学
+
+导	O	B-操作
+航	O	I操作
+去	O	O
+广	B-终点名称	B-终点名称
+州	I-终点名称	I-终点名称
+越	I-终点名称	I-终点名称
+秀	I-终点名称	I-终点名称
+区	I-终点名称	I-终点名称
+儿	I-终点名称	I-终点名称
+童	I-终点名称	I-终点名称
+医	I-终点名称	I-终点名称
+院	I终点名称	I终点名称
+导航 去 广州 越秀区 儿童医院
+
+开	B-操作	B-操作
+始	I-操作	I操作
+导	I-操作	B-对象
+航	I操作	I对象
+开始 导航
+
+帮	O	O
+我	O	O
+导	B-操作	B-操作
+航	I操作	I操作
+监	B-终点名称	B-终点名称
+利	I-终点名称	I-终点名称
+县	I-终点名称	I-终点名称
+大	I-终点名称	I-终点名称
+垸	I-终点名称	I-终点名称
+职	I-终点名称	I-终点名称
+工	I终点名称	I-终点名称
+医	O	I-终点名称
+院	O	I终点名称
+帮 我 导航 监利县 大 垸 职工 医院
+
+去	O	O
+沭	B-终点名称	O
+阳	I-终点名称	O
+县	I-终点名称	O
+中	I-终点名称	O
+华	I-终点名称	O
+小	I终点名称	O
+区	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+去 沭阳县 中华 小区 ##########################################
+
+走	B-路线偏好	B-poi名称
+高	I-路线偏好	I-poi名称
+速	I路线偏好	Ipoi名称
+走 高速
+
+走	B-路线偏好	B-poi名称
+高	I-路线偏好	I-poi名称
+速	I路线偏好	Ipoi名称
+走 高速
+
+导	O	B-操作
+航	O	I操作
+去	O	O
+昆	B-终点名称	B-终点名称
+明	I-终点名称	I-终点名称
+市	I-终点名称	I-终点名称
+第	I-终点名称	I-终点名称
+三	I-终点名称	I-终点名称
+中	I-终点名称	I-终点名称
+学	I终点名称	I终点名称
+导航 去 昆明市 第三 中学
+
+本	O	B-poi名称
+周	O	I-poi名称
+我	O	I-poi名称
+去	O	I-poi名称
+阿	B-终点名称	I-poi名称
+城	I-终点名称	I-poi名称
+区	I-终点名称	I-poi名称
+料	I-终点名称	I-poi名称
+甸	I-终点名称	I-poi名称
+镇	I终点名称	Ipoi名称
+本周 我 去 阿 城区 料甸 镇
+
+我	O	O
+要	O	O
+去	O	O
+吃	O	B-终点名称
+德	B-终点名称	I-终点名称
+天	I-终点名称	I-终点名称
+顺	I-终点名称	I-终点名称
+盖	I-终点名称	I-终点名称
+码	I-终点名称	I-终点名称
+饭	I终点名称	I终点名称
+我 要 去 吃 德 天顺 盖码 饭
+
+去	O	O
+葫	B-终点名称	O
+芦	I-终点名称	O
+山	I终点名称	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+去 葫芦山 #########
+
+去	O	O
+公	O	B-终点名称
+司	B-终点名称	I-终点名称
+是	I-终点名称	I-终点名称
+甘	I-终点名称	I-终点名称
+河	I-终点名称	I-终点名称
+子	I-终点名称	I-终点名称
+镇	I-终点名称	I-终点名称
+#	I终点名称	I终点名称
+去 公司 是 甘河子 镇 #
+
+导	O	B-操作
+航	O	I操作
+导航
+
+到	O	O
+万	O	B-终点名称
+达	B-终点名称	I-终点名称
+旅	I-终点名称	I-终点名称
+游	I-终点名称	I-终点名称
+城	I-终点名称	I-终点名称
+N	I-终点名称	I-终点名称
+七	I-终点名称	I-终点名称
+#	I终点名称	I终点名称
+到 万达 旅游城 N 七 #
+
+D	B-poi名称	B-poi名称
+#	I-poi名称	I-poi名称
+E	Ipoi名称	I-poi名称
+派	O	Ipoi名称
+D # E 派
+
+什	O	O
+么	O	O
+取	O	O
+消	O	O
+导	O	O
+航	O	O
+了	O	O
+不	B-操作	O
+要	I操作	O
+了	B-对象	O
+不	I对象	O
+用	O	O
+了	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+什么 取消 导航 了 不要 了 不用 了 #####
+
+导	B-操作	B-操作
+航	B-对象	I操作
+回	I对象	O
+导航 回
+
+导	B-操作	B-操作
+航	I操作	I操作
+去	O	O
+凯	B-终点名称	B-终点名称
+德	I-终点名称	I-终点名称
+一	I-终点名称	I-终点名称
+八	I-终点名称	I-终点名称
+一	I-终点名称	I-终点名称
+一	I终点名称	I-终点名称
+八	O	I终点名称
+导航 去 凯德 一八 一 一八
+
+继	O	B-操作
+续	O	I操作
+导	O	B-对象
+航	O	I对象
+加	B-终点名称	B-终点名称
+州	I终点名称	I终点名称
+继续 导航 加州
+
+什	B-poi名称	O
+么	I-poi名称	O
+事	Ipoi名称	O
+什么 事
+
+导	B-操作	B-操作
+航	B-对象	I操作
+#	I对象	I对象
+导航 #
+
+来	O	B-poi名称
+青	B-poi名称	I-poi名称
+岛	I-poi名称	I-poi名称
+省	I-poi名称	I-poi名称
+骨	I-poi名称	I-poi名称
+科	I-poi名称	I-poi名称
+医	I-poi名称	I-poi名称
+院	Ipoi名称	Ipoi名称
+来 青岛 省 骨科 医院
+
+帮	O	O
+你	O	O
+汽	O	O
+车	O	O
+城	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	B-poi名称	O
+#	I-poi名称	O
+#	Ipoi名称	O
+帮 你 汽车城 #######
+
+就	O	O
+是	O	O
+他	O	O
+那	O	O
+个	O	O
+错	O	O
+的	O	O
+人	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	B-poi名称	O
+#	I-poi名称	O
+#	Ipoi名称	O
+就是 他 那个 错 的 人 ###########
+
+我	O	O
+找	B-操作	O
+一	O	O
+下	O	O
+武	B-poi名称	B-poi名称
+鸣	I-poi名称	I-poi名称
+县	Ipoi名称	Ipoi名称
+我 找 一下 武鸣县
+
+导	B-操作	O
+航	I操作	O
+到	O	O
+嘉	B-终点名称	O
+兴	I-终点名称	O
+#	I-终点名称	O
+#	I-终点名称	O
+#	I-终点名称	O
+#	I终点名称	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+导航 到 嘉兴 #################
+
+导	B-操作	B-操作
+航	I操作	I操作
+在	O	B-终点名称
+重	B-终点名称	I-终点名称
+庆	I-终点名称	I-终点名称
+将	I-终点名称	I-终点名称
+军	I终点名称	I终点名称
+导航 在 重庆 将军
+
+再	O	O
+见	O	O
+第	O	O
+三	O	O
+个	O	O
+#	O	O
+#	O	O
+#	B-序列号	O
+#	I-序列号	O
+#	I序列号	O
+再见 第三个 #####
+
+萝	O	O
+卜	O	O
+第	O	O
+一	O	O
+个	O	O
+#	O	O
+#	O	O
+#	B-序列号	O
+#	I-序列号	O
+#	I序列号	O
+萝卜 第一个 #####
+
+导	B-操作	B-操作
+航	I操作	I操作
+一	O	O
+下	O	B-终点名称
+北	B-终点名称	I-终点名称
+京	I-终点名称	I-终点名称
+天	I-终点名称	I-终点名称
+安	I-终点名称	I-终点名称
+门	I终点名称	I终点名称
+导航 一下 北京 天安门
+
+附	O	O
+近	O	O
+的	O	O
+四	O	O
+个	O	O
+小	O	O
+孩	O	O
+第	O	O
+四	O	O
+个	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	B-序列号	O
+#	I-序列号	O
+#	I序列号	O
+附近 的 四个 小孩 第四个 #########
+
+迁	B-poi名称	O
+安	I-poi名称	O
+门	I-poi名称	O
+广	I-poi名称	O
+场	I-poi名称	O
+#	I-poi名称	O
+#	I-poi名称	O
+#	I-poi名称	O
+#	Ipoi名称	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+迁安 门 广场 ########################
+
+导	O	B-操作
+航	O	I操作
+到	O	O
+金	O	B-终点名称
+沙	O	I-终点名称
+县	O	I-终点名称
+人	O	I-终点名称
+民	O	I-终点名称
+政	O	I-终点名称
+府	O	I-终点名称
+#	O	I-终点名称
+#	B-终点名称	I-终点名称
+#	I-终点名称	I-终点名称
+#	I-终点名称	I-终点名称
+#	I-终点名称	I-终点名称
+#	I-终点名称	I-终点名称
+#	I-终点名称	I-终点名称
+#	I终点名称	I终点名称
+导航 到 金沙县 人民政府 ########
+
+导	O	B-操作
+航	O	I操作
+到	O	O
+黄	B-终点名称	B-终点名称
+泥	I-终点名称	I-终点名称
+板	I-终点名称	I-终点名称
+立	I-终点名称	I-终点名称
+交	I终点名称	I终点名称
+导航 到 黄 泥板 立交
+
+去	O	O
+金	B-终点名称	B-终点名称
+龙	I-终点名称	I-终点名称
+桥	I终点名称	I-终点名称
+啊	O	I终点名称
+去 金 龙桥 啊
+
+我	O	O
+要	O	O
+回	O	O
+家	B-终点名称	O
+我	O	O
+要	O	O
+回	O	O
+家	O	O
+我	O	O
+要	O	O
+回	O	O
+家	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+我 要 回家 我 要 回家 我 要 回家 ##############
+
+新	B-poi名称	O
+河	I-poi名称	O
+花	I-poi名称	O
+苑	I-poi名称	O
+七	I-poi名称	O
+荷	I-poi名称	O
+花	I-poi名称	O
+苑	I-poi名称	O
+卿	I-poi名称	O
+苑	I-poi名称	O
+#	I-poi名称	O
+#	Ipoi名称	O
+#	O	O
+#	O	O
+#	O	O
+新河 花苑 七 荷花 苑卿苑 #####
+
+退	O	B-操作
+出	B-操作	I操作
+导	I操作	B-对象
+航	B-对象	I对象
+#	I对象	I对象
+退出 导航 #
+
+鹰	B-poi名称	O
+潭	I-poi名称	O
+市	I-poi名称	O
+永	I-poi名称	O
+盛	I-poi名称	O
+广	I-poi名称	O
+场	I-poi名称	O
+#	I-poi名称	O
+#	I-poi名称	O
+#	I-poi名称	O
+#	Ipoi名称	O
+鹰潭市 永盛 广场 ####
+
+附	O	O
+近	O	O
+的	O	O
+线	B-poi目标	O
+缆	I-poi目标	B-poi目标
+专	I-poi目标	I-poi目标
+卖	I-poi目标	I-poi目标
+店	Ipoi目标	Ipoi目标
+附近 的 线缆 专卖店
+
+到	O	O
+青	O	B-终点名称
+海	O	I-终点名称
+西	B-终点名称	I-终点名称
+宁	I-终点名称	I-终点名称
+#	I-终点名称	I-终点名称
+#	I终点名称	I终点名称
+到 青海 西宁 ##
+
+你	O	O
+好	O	O
+个	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	B-序列号	O
+#	I-序列号	O
+#	I序列号	O
+你好 个 #########
+
+导	B-操作	O
+航	I操作	O
+星	O	O
+的	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+导航 星 的 #######
+
+导	O	B-操作
+航	O	I操作
+声	O	B-终点名称
+音	O	I终点名称
+导航 声音
+
+导	O	B-操作
+航	O	I操作
+打	B-操作	B-对象
+开	I操作	I对象
+导航 打开
+
+错	O	B-poi名称
+误	O	Ipoi名称
+错误
+
+打	B-操作	B-操作
+开	I操作	I操作
+导	B-操作	B-对象
+航	O	I对象
+导	O	B-操作
+和	B-终点名称	I操作
+平	I-终点名称	O
+村	I终点名称	O
+打开 导航 导 和平村
+
+不	O	O
+播	B-操作	O
+放	I操作	O
+不 播放
+
+听	O	O
+南	O	O
+收	O	O
+费	O	O
+站	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	B-poi名称	O
+#	I-poi名称	O
+#	I-poi名称	B-poi名称
+#	Ipoi名称	Ipoi名称
+听 南 收费站 ########
+
+我	O	O
+要	O	O
+去	O	O
+附	O	O
+近	O	O
+的	O	O
+民	B-终点目标	O
+生	I-终点目标	O
+银	I-终点目标	O
+行	I终点目标	O
+我 要 去 附近 的 民生银行
+
+帮	O	O
+我	O	O
+导	B-操作	O
+航	I操作	O
+石	O	O
+岘	O	O
+依	O	O
+铮	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	B-终点名称	O
+#	I-终点名称	O
+#	I终点名称	O
+帮 我 导航 石岘 依铮 ########
+
+导	O	B-操作
+航	O	I操作
+到	O	O
+银	B-终点名称	B-终点名称
+海	I-终点名称	I-终点名称
+一	I-终点名称	I-终点名称
+南	I-终点名称	I-终点名称
+山	I终点名称	I终点名称
+导航 到 银海 一 南山
+
+我	O	O
+想	O	O
+吃	B-poi名称	O
+一	I-poi名称	O
+点	I-poi名称	O
+东	I-poi名称	O
+西	Ipoi名称	O
+我 想 吃 一点 东西
+
+导	O	B-操作
+航	O	I操作
+去	O	O
+和	B-终点名称	B-终点名称
+林	I-终点名称	I-终点名称
+格	I-终点名称	I-终点名称
+尔	I-终点名称	I-终点名称
+县	I终点名称	I终点名称
+导航 去 和林格尔县
+
+山	B-poi名称	O
+东	I-poi名称	O
+省	Ipoi名称	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+山东省 #########
+
+导	O	O
+航	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	B-操作
+#	O	I操作
+导航 #######
+
+你	B-poi名称	O
+柏	I-poi名称	O
+路	Ipoi名称	O
+你 柏路
+
+去	O	O
+了	O	B-终点名称
+#	O	I终点名称
+去 了 #
+
+导	B-操作	O
+航	I操作	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	B-操作
+#	O	I操作
+导航 #########
+
+搜	B-操作	B-poi名称
+索	I操作	I-poi名称
+石	B-poi名称	I-poi名称
+狮	I-poi名称	I-poi名称
+世	I-poi名称	I-poi名称
+茂	I-poi名称	I-poi名称
+摩	I-poi名称	I-poi名称
+天	I-poi名称	I-poi名称
+城	Ipoi名称	Ipoi名称
+搜索 石狮 世茂 摩天 城
+
+之	O	O
+后	O	O
+可	O	O
+以	O	O
+给	O	O
+你	O	O
+导	O	O
+航	O	O
+去	O	O
+丰	O	O
+泽	O	O
+大	O	O
+厦	O	O
+#	O	O
+#	B-操作	O
+#	I操作	O
+#	O	O
+#	B-终点名称	O
+#	I-终点名称	O
+#	I-终点名称	O
+#	I终点名称	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+之后 可以 给 你 导航 去 丰泽 大厦 #################
+
+我	O	O
+要	O	O
+去	O	O
+江	O	B-终点名称
+北	B-终点名称	I-终点名称
+机	I-终点名称	I-终点名称
+场	I-终点名称	I-终点名称
+#	I终点名称	I终点名称
+我 要 去 江北 机场 #
+
+导	O	B-操作
+航	O	I操作
+去	O	O
+长	B-终点名称	B-终点名称
+春	I-终点名称	I-终点名称
+市	I-终点名称	I-终点名称
+人	I-终点名称	I-终点名称
+民	I-终点名称	I-终点名称
+广	I-终点名称	I-终点名称
+场	I终点名称	I终点名称
+导航 去 长春市 人民广场
+
+导	B-操作	O
+航	I操作	O
+一	O	O
+下	O	O
+兰	B-终点名称	O
+溪	I-终点名称	O
+市	I-终点名称	O
+学	I终点名称	O
+校	O	O
+上	O	O
+海	O	O
+市	O	O
+上	O	O
+海	O	O
+市	O	O
+后	O	O
+两	O	O
+间	O	O
+导	O	O
+航	O	O
+一	O	O
+下	O	O
+贵	O	O
+阳	O	O
+市	O	O
+花	O	O
+溪	O	O
+区	O	O
+南	O	O
+茜	O	O
+学	O	O
+校	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+导航 一下 兰溪市 学校 上海市 上海市 后 两间 导航 一下 贵阳市 花溪区 南茜 学校 ##################
+
+找	O	B-poi名称
+吃	O	I-poi名称
+#	O	Ipoi名称
+找 吃 #
+
+找	O	O
+最	O	O
+近	O	O
+的	O	O
+路	O	O
+到	O	O
+最	O	O
+近	O	O
+的	O	O
+路	O	O
+到	O	O
+中	B-终点名称	O
+华	I-终点名称	O
+大	I-终点名称	O
+街	I-终点名称	B-poi目标
+绿	I-终点名称	I-poi目标
+化	I-终点名称	I-poi目标
+路	I-终点名称	I-poi目标
+口	I终点名称	Ipoi目标
+找 最近 的 路 到 最近 的 路 到 中华 大街 绿化 路口
+
+没	O	B-poi名称
+信	O	I-poi名称
+号	O	Ipoi名称
+吗	O	O
+没 信号 吗
+
+去	O	O
+蒋	O	O
+钰	O	O
+华	O	O
+学	O	O
+校	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	B-终点名称	O
+#	I终点名称	O
+去 蒋钰华 学校 ######
+
+去	O	O
+爱	B-终点名称	B-终点名称
+琴	I-终点名称	I-终点名称
+海	I-终点名称	I-终点名称
+购	I-终点名称	I-终点名称
+物	I-终点名称	I-终点名称
+吴	I-终点名称	I-终点名称
+忠	I-终点名称	I-终点名称
+公	I终点名称	I-终点名称
+园	O	I终点名称
+去 爱琴海 购物 吴忠 公园
+
+为	O	O
+何	O	O
+的	O	O
+导	O	O
+航	O	O
+北	O	O
+门	O	O
+保	O	O
+国	B-操作	O
+农	I操作	O
+场	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	B-终点名称	O
+#	I-终点名称	O
+#	I-终点名称	O
+#	I终点名称	O
+为何 的 导航 北门 保国 农场 ############
+
+我	O	O
+要	O	O
+问	O	O
+导	O	B-操作
+航	O	I操作
+了	O	O
+我 要 问 导航 了
+
+哪	O	O
+有	O	O
+拉	B-poi名称	O
+屎	I-poi名称	O
+的	I-poi名称	O
+地	I-poi名称	O
+方	Ipoi名称	O
+哪 有 拉屎 的 地方
+
+去	O	O
+南	O	O
+香	O	O
+山	O	O
+派	O	O
+出	O	O
+所	O	O
+#	O	O
+#	O	O
+#	O	O
+#	B-终点名称	O
+#	I-终点名称	O
+#	I-终点名称	O
+#	I-终点名称	O
+#	I-终点名称	O
+#	I终点名称	O
+去 南 香山 派出所 #########
+
+导	B-操作	B-操作
+航	I操作	I操作
+去	O	O
+应	B-终点名称	B-终点名称
+合	I终点名称	I-终点名称
+与	O	I-终点名称
+和	O	I-终点名称
+映	O	I-终点名称
+像	O	I-终点名称
+#	O	I-终点名称
+#	O	I-终点名称
+#	O	I-终点名称
+#	O	I-终点名称
+#	O	I终点名称
+导航 去 应合 与 和 映像 #####
+
+我	O	O
+要	O	O
+吃	O	O
+饺	B-poi名称	O
+子	Ipoi名称	O
+我 要 吃饺子
+
+我	O	O
+要	O	O
+吃	O	O
+饺	B-poi名称	O
+子	Ipoi名称	O
+我 要 吃饺子
+
+导	O	B-操作
+航	O	I操作
+金	B-终点名称	B-终点名称
+云	I-终点名称	I-终点名称
+国	I-终点名称	I-终点名称
+际	I-终点名称	I-终点名称
+小	I-终点名称	I-终点名称
+区	I终点名称	I终点名称
+导航 金云 国际 小区
+
+公	O	O
+元	O	O
+停	O	O
+车	O	O
+场	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	B-poi名称	O
+#	I-poi名称	O
+#	I-poi名称	O
+#	I-poi名称	O
+#	Ipoi名称	O
+公元 停车场 #########
+
+你	O	O
+好	O	O
+打	O	O
+开	O	O
+学	O	O
+花	O	O
+果	O	O
+园	O	O
+龙	O	O
+发	O	O
+装	O	O
+饰	B-操作	O
+的	I操作	O
+导	O	O
+航	O	O
+我	O	O
+们	O	O
+财	O	O
+富	O	O
+广	O	O
+场	O	O
+七	O	O
+号	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	B-poi名称	O
+#	I-poi名称	O
+#	I-poi名称	O
+#	I-poi名称	O
+#	I-poi名称	O
+#	I-poi名称	O
+#	I-poi名称	O
+#	Ipoi名称	O
+你好 打开 学花 果园 龙发 装饰 的 导航 我们 财富 广场 七号 #############
+
+给	O	B-poi名称
+海	O	I-poi名称
+石	O	I-poi名称
+湾	O	I-poi名称
+宏	O	I-poi名称
+正	O	I-poi名称
+打	O	I-poi名称
+电	O	I-poi名称
+话	O	Ipoi名称
+给 海 石湾 宏正 打电话
+
+导	B-操作	O
+航	I操作	O
+条	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	B-终点名称	O
+#	I-终点名称	B-操作
+#	I终点名称	I操作
+导航条 ############
+
+调	O	O
+一	O	O
+调	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	B-poi名称	O
+#	I-poi名称	O
+#	I-poi名称	O
+#	Ipoi名称	O
+调一 调 ##########
+
+财	B-终点名称	B-poi名称
+通	I-终点名称	I-poi名称
+中	I-终点名称	I-poi名称
+心	I-终点名称	I-poi名称
+医	I-终点名称	I-poi名称
+院	I终点名称	I-poi名称
+怎	O	I-poi名称
+么	O	I-poi名称
+走	O	Ipoi名称
+财通 中心医院 怎么 走
+
+看	O	O
+一	O	O
+下	O	O
+附	O	O
+近	O	O
+有	O	O
+桑	B-poi目标	O
+拿	I-poi目标	O
+室	Ipoi目标	O
+吗	B-请求类型	O
+看 一下 附近 有 桑拿室 吗
+
+帮	O	O
+我	O	O
+找	B-操作	O
+一	O	O
+下	O	O
+附	B-请求类型	O
+近	I请求类型	O
+哪	O	O
+里	O	O
+有	O	O
+小	O	O
+姐	O	O
+破	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+帮 我 找 一下 附近 哪里 有 小姐 破 ######
+
+到	O	O
+莲	B-终点名称	O
+花	I-终点名称	O
+城	I-终点名称	O
+店	I终点名称	O
+右	O	O
+转	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+到 莲花 城店 右转 ###############
+
+我	O	O
+要	O	O
+去	O	O
+到	B-终点名称	O
+武	I-终点名称	B-终点名称
+昌	I终点名称	I终点名称
+我 要 去 到 武昌
+
+带	O	O
+我	O	O
+去	O	O
+嫖	O	B-终点名称
+娼	O	I终点名称
+带我去 嫖娼
+
+滚	O	B-poi名称
+滚	O	I-poi名称
+滚	O	Ipoi名称
+滚滚 滚
+
+我	O	O
+要	O	O
+去	O	O
+来	B-终点名称	B-终点名称
+安	I-终点名称	I-终点名称
+西	I终点名称	I-终点名称
+式	O	I终点名称
+我 要 去 来 安西 式
+
+我	O	O
+要	O	O
+去	B-终点名称	O
+白	I-终点名称	B-终点名称
+城	I-终点名称	I-终点名称
+只	I终点名称	I-终点名称
+是	O	I终点名称
+我 要 去 白城 只是
+
+贵	O	B-poi名称
+州	O	I-poi名称
+到	O	I-poi名称
+贵	B-终点名称	I-poi名称
+州	I-终点名称	I-poi名称
+师	I-终点名称	I-poi名称
+范	I终点名称	Ipoi名称
+贵州 到 贵州 师范
+
+导	B-操作	B-操作
+航	B-对象	I操作
+#	I对象	I对象
+导航 #
+
+找	O	O
+到	O	O
+东	O	O
+山	O	O
+一	O	O
+中	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	B-poi名称	O
+#	Ipoi名称	O
+#	B-操作	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+找到 东山 一中 ################
+
+导	B-操作	B-操作
+航	B-对象	I操作
+#	I对象	I对象
+导航 #
+
+导	B-操作	B-操作
+航	B-对象	I操作
+#	I对象	I对象
+导航 #
+
+电	B-poi名称	O
+台	I-poi名称	O
+云	I-poi名称	O
+大	Ipoi名称	O
+医	O	O
+院	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+电台 云 大 医院 ####
+
+这	O	O
+附	O	O
+近	O	O
+有	O	O
+没	O	O
+有	O	O
+吃	O	O
+饭	B-poi目标	O
+的	Ipoi目标	O
+地	B-请求类型	O
+方	I请求类型	B-poi目标
+#	O	Ipoi目标
+这 附近 有没有 吃饭 的 地方 #
+
+在	O	B-poi名称
+湾	B-poi名称	I-poi名称
+里	I-poi名称	I-poi名称
+村	Ipoi名称	Ipoi名称
+在 湾里 村
+
+导	O	B-操作
+航	B-终点名称	I操作
+玲	I-终点名称	B-终点名称
+超	I-终点名称	I-终点名称
+市	I终点名称	I终点名称
+导航 玲 超市
+
+讲	O	O
+个	O	O
+吹	O	B-poi名称
+牛	O	I-poi名称
+技	O	I-poi名称
+术	O	I-poi名称
+青	O	I-poi名称
+铜	B-poi名称	I-poi名称
+峡	I-poi名称	I-poi名称
+市	I-poi名称	I-poi名称
+韶	I-poi名称	I-poi名称
+岗	I-poi名称	I-poi名称
+镇	I-poi名称	I-poi名称
+同	I-poi名称	I-poi名称
+富	I-poi名称	I-poi名称
+村	I-poi名称	I-poi名称
+#	Ipoi名称	Ipoi名称
+讲 个 吹牛 技术 青铜峡市 韶岗镇 同 富村 #
+
+去	O	O
+西	O	O
+和	O	O
+县	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	B-终点名称	O
+#	I-终点名称	O
+#	I终点名称	O
+去 西和县 #########
+
+这	O	O
+旁	B-请求类型	O
+边	I请求类型	O
+有	O	O
+葡	B-poi目标	O
+萄	I-poi目标	O
+采	I-poi目标	O
+摘	I-poi目标	O
+园	Ipoi目标	O
+#	O	O
+这 旁边 有 葡萄 采摘 园 #
+
+我	B-poi名称	O
+在	I-poi名称	O
+哪	Ipoi名称	O
+里	O	O
+#	O	O
+我 在 哪里 #
+
+导	B-操作	B-操作
+航	I操作	I操作
+模	O	B-终点名称
+式	O	I终点名称
+导航 模式
+
+导	O	B-操作
+航	O	I操作
+到	O	O
+美	B-终点名称	B-终点名称
+璟	I-终点名称	I-终点名称
+欣	I-终点名称	I-终点名称
+城	I终点名称	I终点名称
+导航 到 美 璟 欣 城
+
+五	B-poi名称	O
+个	I-poi名称	O
+字	I-poi名称	O
+是	Ipoi名称	O
+五个 字 是
+
+不	O	O
+是	O	O
+个	B-poi名称	O
+刺	I-poi名称	O
+客	I-poi名称	O
+开	I-poi名称	O
+启	I-poi名称	B-poi名称
+路	I-poi名称	I-poi名称
+科	I-poi名称	I-poi名称
+技	I-poi名称	I-poi名称
+路	Ipoi名称	Ipoi名称
+不是 个 刺客 开启 路 科技 路
+
+这	B-poi名称	O
+个	I-poi名称	O
+泽	I-poi名称	O
+科	I-poi名称	B-poi名称
+技	I-poi名称	I-poi名称
+路	Ipoi名称	Ipoi名称
+这个 泽 科技 路
+
+你	O	O
+看	O	O
+这	O	O
+珠	O	O
+峰	O	O
+路	O	O
+#	O	O
+#	O	O
+#	O	O
+#	B-poi名称	O
+#	I-poi名称	O
+#	Ipoi名称	O
+你 看 这 珠峰 路 ######
+
+我	O	O
+要	O	O
+到	O	O
+植	B-poi名称	B-终点名称
+物	Ipoi名称	I终点名称
+我 要 到 植物
+
+给	O	O
+我	O	O
+找	O	O
+就	B-请求类型	O
+近	I请求类型	O
+的	B-操作	O
+K	O	O
+T	O	O
+V	O	O
+给	B-poi目标	O
+我	I-poi目标	O
+给 我 找 就近 的 KTV 给 我
+
+我	O	O
+要	O	O
+去	O	O
+那	O	B-终点名称
+个	O	I-终点名称
+凤	B-终点名称	I-终点名称
+凰	I-终点名称	I-终点名称
+台	I终点名称	I终点名称
+我 要 去 那个 凤凰台
+
+到	B-poi名称	O
+二	I-poi名称	B-终点名称
+环	I-poi名称	I-终点名称
+西	Ipoi名称	I-终点名称
+路	O	I终点名称
+到 二环 西路
+
+导	B-操作	O
+航	I操作	O
+#	B-终点名称	O
+#	I-终点名称	O
+#	I终点名称	O
+导航 ###
+
+南	B-poi名称	O
+京	Ipoi名称	O
+杠	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+南京 杠 ########
+
+请	O	O
+我	O	O
+要	O	O
+去	B-终点名称	O
+金	I-终点名称	O
+纪	I-终点名称	O
+元	I-终点名称	O
+大	I终点名称	O
+厦	O	O
+十	O	O
+一	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+请 我 要 去 金 纪元 大厦 十一 ###########################
+
+简	B-poi名称	O
+阳	I-poi名称	O
+市	I-poi名称	O
+三	Ipoi名称	O
+八	O	O
+和	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+简阳市 三八 和 #######
+
+好	O	B-poi名称
+不	O	I-poi名称
+吃	O	I-poi名称
+东	O	I-poi名称
+西	O	I-poi名称
+#	O	Ipoi名称
+好 不吃 东西 #
+
+珠	B-poi名称	O
+海	I-poi名称	O
+馆	I-poi名称	O
+#	I-poi名称	O
+#	Ipoi名称	O
+珠海 馆 ##
+
+导	O	B-操作
+航	B-操作	I操作
+#	I操作	I对象
+导航 #
+
+你	O	O
+好	O	O
+导	O	B-操作
+航	O	I操作
+去	O	O
+玉	B-终点名称	B-终点名称
+溪	I-终点名称	I-终点名称
+市	I-终点名称	I-终点名称
+北	I-终点名称	I-终点名称
+城	I-终点名称	I-终点名称
+镇	I终点名称	I终点名称
+你好 导航 去 玉溪市 北 城镇
+
+我	O	O
+想	O	O
+吃	O	O
+西	B-poi名称	O
+餐	Ipoi名称	O
+我 想 吃 西餐
+
+到	B-操作	O
+单	I操作	O
+小	O	O
+林	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	B-终点名称	O
+#	I终点名称	O
+到 单 小林 ##########
+
+龙	O	O
+盘	B-poi名称	O
+家	I-poi名称	B-终点名称
+具	I-poi名称	I-终点名称
+#	Ipoi名称	I终点名称
+龙盘 家具 #
+
+就	O	B-poi名称
+是	O	I-poi名称
+我	B-poi名称	I-poi名称
+安	I-poi名称	I-poi名称
+县	Ipoi名称	Ipoi名称
+就是 我 安县
+
+我	B-poi名称	O
+要	I-poi名称	O
+来	Ipoi名称	O
+一	O	O
+见	O	O
+我 要 来 一 见
+
+来	O	O
+去	O	O
+寺	O	O
+山	O	O
+路	O	O
+看	O	O
+一	O	O
+村	O	O
+#	O	O
+#	O	O
+#	B-终点名称	O
+#	I-终点名称	O
+#	I终点名称	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+来 去 寺 山路 看 一村 ##############
+
+不	O	B-poi名称
+是	O	I-poi名称
+大	B-poi名称	I-poi名称
+同	I-poi名称	I-poi名称
+同	I-poi名称	I-poi名称
+煤	I-poi名称	I-poi名称
+集	I-poi名称	I-poi名称
+团	Ipoi名称	Ipoi名称
+不是 大同 同煤 集团
+
+南	O	B-poi名称
+北	O	Ipoi名称
+南北
+
+导	O	B-操作
+航	O	I操作
+白	O	O
+天	O	O
+堂	O	O
+新	O	O
+城	O	O
+#	O	O
+#	O	O
+#	B-poi名称	O
+#	I-poi名称	O
+#	I-poi名称	O
+#	I-poi名称	O
+#	Ipoi名称	O
+导航 白 天堂 新城 #######
+
+你	O	O
+说	O	O
+呀	O	O
+成	O	O
+都	B-poi名称	O
+#	Ipoi名称	O
+你 说 呀 成都 #
+
+导	O	B-操作
+航	O	I操作
+去	O	O
+天	B-终点名称	B-终点名称
+津	I-终点名称	I-终点名称
+富	I-终点名称	I-终点名称
+士	I-终点名称	I-终点名称
+达	I终点名称	I终点名称
+导航 去 天津 富士达
+
+你	O	O
+好	O	O
+小	O	O
+强	O	O
+导	B-操作	B-操作
+航	I操作	I操作
+到	O	O
+广	B-终点名称	B-终点名称
+东	I-终点名称	I-终点名称
+广	I-终点名称	I-终点名称
+东	I-终点名称	I-终点名称
+省	I-终点名称	I-终点名称
+梅	I-终点名称	I-终点名称
+州	I终点名称	I-终点名称
+市	O	I终点名称
+你好 小强 导航 到 广东 广东省 梅州市
+
+你	O	O
+好	O	O
+小	O	O
+强	O	O
+第	B-序列号	O
+三	I-序列号	O
+个	I序列号	O
+你好 小强 第三个
+
+导	O	O
+航	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	B-操作	O
+#	B-对象	B-操作
+#	I对象	I操作
+导航 ##########
+
+搞	O	B-poi名称
+错	O	I-poi名称
+了	O	I-poi名称
+渭	B-poi名称	I-poi名称
+南	I-poi名称	I-poi名称
+市	I-poi名称	I-poi名称
+人	I-poi名称	I-poi名称
+民	I-poi名称	I-poi名称
+政	I-poi名称	I-poi名称
+府	Ipoi名称	Ipoi名称
+搞错 了 渭南市 人民政府
+
+去	B-序列号	O
+个	I-序列号	O
+第	I序列号	B-序列号
+一	O	I-序列号
+个	O	I序列号
+#	O	I序列号
+去 个 第一个 #
+
+吐	B-poi名称	O
+鲁	I-poi名称	O
+番	Ipoi名称	O
+吐鲁番
+
+你	B-序列号	O
+个	I-序列号	O
+#	I序列号	O
+你个 #
+
+导	O	B-操作
+航	O	I操作
+导航
+
+导	O	B-操作
+航	O	I操作
+到	O	O
+昌	B-终点名称	B-终点名称
+平	I-终点名称	I-终点名称
+洋	I-终点名称	I-终点名称
+房	I-终点名称	I-终点名称
+大	I-终点名称	I-终点名称
+督	I-终点名称	I-终点名称
+帅	I-终点名称	I-终点名称
+肉	I终点名称	I终点名称
+导航 到 昌平 洋房 大督帅 肉
+
+赶	O	O
+紧	O	O
+把	O	O
+这	O	O
+个	O	O
+导	O	O
+航	O	O
+关	O	O
+都	O	O
+关	B-操作	O
+了	I操作	O
+闭	B-对象	O
+嘴	I对象	O
+#	O	O
+#	O	O
+赶紧 把 这个 导航 关都 关了 闭嘴 ##
+
+导	O	B-操作
+航	O	I操作
+到	O	O
+华	B-终点名称	B-终点名称
+旗	I-终点名称	I-终点名称
+金	I-终点名称	I-终点名称
+悦	I-终点名称	I-终点名称
+府	I终点名称	I终点名称
+导航 到 华旗 金悦府
+
+导	B-操作	B-操作
+航	I操作	I操作
+到	O	O
+六	B-终点名称	B-终点名称
+味	I终点名称	I-终点名称
+乡	O	I-终点名称
+村	O	I终点名称
+导航 到 六味 乡村
+
+退	O	B-操作
+出	O	I操作
+导	O	B-对象
+航	O	I对象
+地	B-对象	O
+图	I对象	O
+退出 导航 地图
+
+去	O	O
+上	O	B-终点名称
+海	B-终点名称	I-终点名称
+#	I终点名称	I终点名称
+去 上海 #
+
+我	O	O
+要	O	O
+去	O	O
+曹	B-终点名称	B-终点名称
+县	I-终点名称	I-终点名称
+韩	I-终点名称	I-终点名称
+金	I-终点名称	I-终点名称
+翰	I-终点名称	I-终点名称
+境	I-终点名称	I-终点名称
+#	I-终点名称	I-终点名称
+#	I终点名称	I-终点名称
+#	O	I终点名称
+我 要 去 曹县 韩金翰 境 ###
+
+回	O	O
+昆	O	O
+明	O	O
+最	O	O
+近	O	O
+的	O	O
+高	B-路线偏好	B-poi目标
+速	I-路线偏好	I-poi目标
+公	I-路线偏好	I-poi目标
+路	I路线偏好	Ipoi目标
+回 昆明 最近 的 高速公路
+
+导	O	O
+航	O	O
+一	O	O
+下	O	O
+长	O	O
+治	O	O
+市	O	O
+山	O	O
+西	O	O
+省	B-操作	O
+长	I操作	O
+治	O	O
+市	O	O
+#	B-终点名称	O
+#	I-终点名称	O
+#	I-终点名称	O
+#	I-终点名称	O
+#	I-终点名称	O
+#	I-终点名称	O
+#	I-终点名称	O
+#	I-终点名称	O
+#	I终点名称	O
+导航 一下 长治市 山西省 长治市 #########
+
+导	O	B-操作
+航	O	I操作
+到	O	O
+官	B-终点名称	B-终点名称
+渡	I-终点名称	I-终点名称
+区	I-终点名称	I-终点名称
+八	I-终点名称	I-终点名称
+公	I-终点名称	I-终点名称
+里	I终点名称	I终点名称
+导航 到 官渡区 八公里
+
+上	B-页码	B-页码
+一	I-页码	I页码
+页	I页码	I页码
+上 一页
+
+导	O	O
+航	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	B-操作
+#	O	I操作
+导航 #######
+
+去	O	O
+戈	O	O
+给	O	O
+我	O	O
+退	O	O
+出	O	O
+导	O	O
+航	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	B-操作	O
+#	I操作	O
+#	B-对象	O
+#	I对象	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+#	O	O
+去 戈 给 我 退出 导航 ############################
+
+导	B-操作	B-操作
+航	B-对象	I操作
+#	I对象	I对象
+导航 #
+
+我	O	O
+要	O	O
+去	O	O
+最	B-请求类型	O
+近	I请求类型	O
+的	O	O
+合	B-终点目标	O
+家	I-终点目标	O
+福	I-终点目标	O
+超	I-终点目标	O
+市	I终点目标	O
+我 要 去 最近 的 合家 福 超市
+
+我	O	O
+要	O	O
+到	O	O
+那	O	O
+个	O	O
+宫	O	O
+那	O	O
+个	O	O
+卫	B-终点名称	O
+生	I-终点名称	O
+局	I终点名称	O
+我 要 到 那个 宫 那个 卫生局
+
+我	O	O
+要	O	O
+到	O	O
+那	O	B-终点名称
+个	O	I-终点名称
+卫	B-终点名称	I-终点名称
+生	I-终点名称	I-终点名称
+和	I-终点名称	I-终点名称
+计	I-终点名称	I-终点名称
+划	I-终点名称	I-终点名称
+生	I-终点名称	I-终点名称
+育	I-终点名称	I-终点名称
+局	I终点名称	I终点名称
+我 要 到 那个 卫生 和 计划生育 局
+
