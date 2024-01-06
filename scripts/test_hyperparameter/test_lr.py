@@ -5,10 +5,11 @@ test_model = ["slu_baseline","CRF_LSTM","Pure_BERT","CRF_LSTM_BERT"]
 
 test_lr = ["1e-3","1e-4","1e-5"]
 
+#[CHANGE] 修改为希望测试的模型
 model = test_model[3]
 for lr in test_lr :
     print("model:" ,model, "lr",lr)
-    command = f"/bin/python scripts/{model}.py --lr {lr}"
+    command = f"/bin/python scripts/{model}.py --lr {lr} --testing"
     try:
         subprocess.run(command, shell=True, check=True)
     except subprocess.CalledProcessError as e:

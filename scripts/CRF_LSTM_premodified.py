@@ -38,7 +38,7 @@ args.num_tags = Example.label_vocab.num_tags
 args.tag_pad_idx = Example.label_vocab.convert_tag_to_idx(PAD)
 
 # 这里补充了保存loss 还有准确率到logs,以及保存checkpoints、test的时候导入pre_load 的初始化
-expr_name = f"CRF_LSTM_lr_{args.lr}_aug_{args.aug_ratio}_old_aug_modified_pinyin_{args.pinyin}_dis_{args.dis}_test"
+expr_name = f"CRF_LSTM_lr_{args.lr}_aug_{args.aug_ratio}_old_aug_modified_pinyin_{args.pinyin}_dis_{args.dis}_test_"
 print("[EXPRI] ", expr_name)
 model = CRF_LSTM(args).to(device)
 writer = SummaryWriter(os.path.join("logs",expr_name))
@@ -46,9 +46,9 @@ Example.word2vec.load_embeddings(model.word_embed, Example.word_vocab, device=de
 
 if args.testing:
     # 这里稍微修改了preload的路径
-    # check_point = torch.load(open(os.path.join("checkpoints",expr_name), 'rb'), map_location=device)
+    check_point = torch.load(open(os.path.join("checkpoints",expr_name), 'rb'), map_location=device)
     
-    check_point = torch.load(open(os.path.join("checkpoints","CRF_LSTM_lr_0.001_aug_0.3_old_aug_modified"), 'rb'), map_location=device)
+    # check_point = torch.load(open(os.path.join("checkpoints","CRF_LSTM_lr_0.001_aug_0.3_old_aug_modified"), 'rb'), map_location=device)
     model.load_state_dict(check_point['model'])
     print("Load saved model from root path")
 
@@ -72,8 +72,8 @@ def decode(choice):
             current_batch = from_example_list(args, cur_dataset, device, train=True)
             pred, label, loss = model.decode(Example.label_vocab, current_batch)
             if choice == "dev":
-                # pred = modified_pred(pred,distance= args.dis, pinyin= ( args.pinyin))
-                pred = modified_pred(pred,distance= "lev", pinyin= ( True))
+                pred = modified_pred(pred,distance= args.dis, pinyin= ( args.pinyin))
+                # pred = modified_pred(pred,distance= "lev", pinyin= ( True))
 
             for j in range(len(current_batch)):
                 if any([l.split('-')[-1] not in current_batch.utt[j] for l in pred[j]]):

@@ -2,10 +2,10 @@ import subprocess
 
 test_model = ["CRF_LSTM_premodified.py  --lr 1e-3 --aug_ratio 0.3 ","Pure_BERT_premodified.py --lr 1e-5 --aug_ratio 0.3"]
 
-test_pinyin = [False]
+test_pinyin = [True,False]
 test_dis = ["jac", 'lev']
 
-model = test_model[1]
+model = test_model[0]
 for pinyin in test_pinyin :
     for dis in test_dis:
         print("model:" ,model, "pinyin: ", pinyin , 'test_dis: ', dis)

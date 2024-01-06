@@ -39,7 +39,7 @@ args.tag_pad_idx = Example.label_vocab.convert_tag_to_idx(PAD)
 
 # 这里补充了保存loss 还有准确率到logs,以及保存checkpoints、test的时候导入pre_load 的初始化
 
-expr_name = f"CRF_LSTM_BERT_TokenClassification_Hidd_lr_{args.lr}_freeze_layer_{args.freeze_layer_num}_aug_{args.aug_ratio}_test"
+expr_name = f"CRF_LSTM_BERT_TokenClassification_Hidd_lr_{args.lr}_freeze_layer_{args.freeze_layer_num}_aug_{args.aug_ratio}_test_"
 print("[EXPRI] ", expr_name)
 model = CRF_LSTM_BERT(args).to(device)
 writer = SummaryWriter(os.path.join("logs",expr_name))
