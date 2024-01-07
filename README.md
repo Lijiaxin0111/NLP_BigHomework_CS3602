@@ -2,6 +2,34 @@
 
 
 
+## 文件结构
+
+`scripts`  :
+
+- 含有 LSTM_CRF 、 Pure_BERT、 BERT_LSTM_CRF以及带有数据增强和后纠错的训练框架代码
+- `analyze`: 数据分析代码
+- `test_hyperparameter` 含有测试训练超参的脚本
+
+`model`: 含有LSTM_CRF 、 Pure_BERT、 BERT_LSTM_CRF的模型实现
+
+`co-interative transformer`: 含有Co-interactive transformer的模型实现以及训练测试代码
+
+`MLWA-Chinese-SLU-baseline-main`：  含有MLWA的模型实现以及训练测试代码
+
+`utils`  :含有 `data_augment.py` 数据增强模块   `premodified.py` 后纠错模块
+
+`appendix`： 含有未在实验报告展示的实验测试结果图
+
+
+
+
+
+
+
+
+
+
+
 ## 数据分析
 
 ```
@@ -61,12 +89,6 @@ python scripts/analyze/data_analyze.py
 
 ### 测试不同相似度计算方式下进行后纠错的CRF_LSTM\Pure_BERT
 
-
-```
-# 环境配置
-pip install pypinyin
-```
-
 ```
 # 在scripts/test_hyperparameter/test_dis_pinyin.py中修改参数
 # [CHANGE] 修改为希望测试的模型
@@ -81,4 +103,8 @@ pip install pypinyin
 
 
 
+
+### 测试Co-Interactive Model
+
+方法见`co-interative tranformer/README.md`
 
