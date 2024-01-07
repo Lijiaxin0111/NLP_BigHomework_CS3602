@@ -1,3 +1,0 @@
-inform	0
-none	1
-deny	2

@@ -1,3 +1,0 @@
-inform	3941
-none	1173
-deny	5
