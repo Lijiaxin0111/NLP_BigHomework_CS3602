@@ -18,15 +18,30 @@
 
 `utils`  :含有 `data_augment.py` 数据增强模块   `premodified.py` 后纠错模块
 
+`train_split.json`: 数据增强测试时，抽取出的来自train set的value值
+
 `appendix`： 含有未在实验报告展示的实验测试结果图
 
+`data\prediction.json` 为输出`test.json`的预测value值文件 
+
+> 由于所给的test样例较为简单，我们只给出了co-interative transformer的预测结果，其他的预测结果基本相同
+
+
+
+除了上述文件，还对所给框架中的`args`、 `baseline.py` 等做了参数补充相关的简单修改，均在代码中加以注释
+
+其他文件来自初始所给的文件框架
 
 
 
 
 
+## 训练好的模型
 
+请在https://jbox.sjtu.edu.cn/l/G1MhQU 中的`ckpt`文件夹中下载，内含
 
+- 最好性能的多个不同模型的参数
+- 测试不同weight的co-interative transformer模型
 
 
 
@@ -68,7 +83,7 @@ python scripts/analyze/data_analyze.py
 
 > :bulb: 如果想要进行训练，把下面的command中的 --testing去掉即可
 
-### 
+
 
 ### 测试不同aug ratio下进行数据增强的baseline\CRF_LSTM\Pure_BERT\CRF_LSTM_BERT
 
@@ -108,3 +123,8 @@ python scripts/analyze/data_analyze.py
 
 方法见`co-interative tranformer/README.md`
 
+
+
+### 测试MLWA
+
+方法见`MLWA-Chinese-SLU-baseline-main/README.md`
