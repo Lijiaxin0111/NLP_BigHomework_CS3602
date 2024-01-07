@@ -14,9 +14,7 @@ from src.modules.gnn_module import GnnModelManager
 from src.modules.deeper_module import DeeperModelManager
 from src.data_loader.loader import DatasetManager
 from src.process import Processor
-
 import torch
-
 import os
 import json
 import random
@@ -45,12 +43,12 @@ parser.add_argument('--data_dir', '-dd', type=str, default='data\Project_data')
 parser.add_argument('--train_file_name', '-train_file', type=str, default='train.json')
 parser.add_argument('--valid_file_name', '-valid_file', type=str, default='dev.json')
 parser.add_argument('--test_file_name', '-test_file', type=str, default='test.json')
-parser.add_argument('--save_dir', '-sd', type=str, default='save')
+parser.add_argument('--save_dir', '-sd', type=str, default='debug')
 parser.add_argument("--random_state", '-rs', type=int, default=0)
 parser.add_argument('--num_epoch', '-ne', type=int, default=50)
 parser.add_argument('--batch_size', '-bs', type=int, default=16)
 parser.add_argument('--l2_penalty', '-lp', type=float, default=1e-6)
-parser.add_argument("--learning_rate", '-lr', type=float, default=0.0005)
+parser.add_argument("--learning_rate", '-lr', type=float, default=5e-4)
 parser.add_argument("--max_grad_norm", "-mgn", default=1.0, type=float, help="Max gradient norm.")
 parser.add_argument('--dropout_rate', '-dr', type=float, default=0.3)
 # parser.add_argument('--intent_forcing_rate', '-ifr', type=float, default=0.9)
@@ -167,9 +165,7 @@ if __name__ == "__main__":
             process.train()
         except KeyboardInterrupt:
             print ("Exiting from training early.")
-
     model = torch.load(os.path.join(args.save_dir, "model/model.pkl"))
     dataset = torch.load(os.path.join(args.save_dir, "model/dataset.pkl"))
-
     print('\nAccepted performance: ' + str(Processor.validate(
         model, dataset, args.batch_size * 2)) + " at test dataset;\n")
