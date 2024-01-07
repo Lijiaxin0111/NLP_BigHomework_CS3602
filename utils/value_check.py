@@ -6,7 +6,7 @@ import random
 import re
 
 '''
-  value 检查
+  value 检查: 在predict的时候检查是否value在ontology出现过,如果没有出现过
  
 '''
 

@@ -39,7 +39,7 @@ args.tag_pad_idx = Example.label_vocab.convert_tag_to_idx(PAD)
 
 # 这里补充了保存loss 还有准确率到logs,以及保存checkpoints、test的时候导入pre_load 的初始化
 
-expr_name = f"CRF_LSTM_BERT_TokenClassification_Hidd_lr_{args.lr}_freeze_layer_{args.freeze_layer_num}_aug_{args.aug_ratio}_new_aug"
+expr_name = f"CRF_LSTM_BERT_TokenClassification_Hidd_lr_{args.lr}_freeze_layer_{args.freeze_layer_num}_aug_{args.aug_ratio}_test_"
 print("[EXPRI] ", expr_name)
 model = CRF_LSTM_BERT(args).to(device)
 writer = SummaryWriter(os.path.join("logs",expr_name))
@@ -48,7 +48,9 @@ writer = SummaryWriter(os.path.join("logs",expr_name))
 
 if args.testing:
     # 这里稍微修改了preload的路径
-    check_point = torch.load(open(os.path.join("checkpoints",expr_name), 'rb'), map_location=device)
+    # check_point = torch.load(open(os.path.join("checkpoints",expr_name), 'rb'), map_location=device)
+    check_point = torch.load(open(os.path.join("checkpoints","CRF_LSTM_BERT_TokenClassification_Hidd_lr_0.001_freeze_layer_12"), 'rb'), map_location=device)
+
     model.load_state_dict(check_point['model'])
     print("Load saved model from root path")
 
@@ -71,6 +73,7 @@ def decode(choice):
             cur_dataset = dataset[i: i + args.batch_size]
             current_batch = from_example_list(args, cur_dataset, device, train=True)
             pred, label, loss = model.decode(Example.label_vocab, current_batch)
+ 
             for j in range(len(current_batch)):
                 if any([l.split('-')[-1] not in current_batch.utt[j] for l in pred[j]]):
                     print(current_batch.utt[j], pred[j], label[j])

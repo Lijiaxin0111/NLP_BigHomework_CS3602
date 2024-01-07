@@ -52,8 +52,6 @@ def get_new_num(input_string):
     replacement = random.choice(replacements)
     return replacement, match
 
-     
-
 
 
 

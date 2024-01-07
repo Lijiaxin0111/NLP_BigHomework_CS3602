@@ -39,7 +39,7 @@ args.tag_pad_idx = Example.label_vocab.convert_tag_to_idx(PAD)
 
 
 # 这里补充了保存loss 还有准确率到logs,以及保存checkpoints、test的时候导入pre_load 的初始化
-expr_name = f"slu_baseline_lr_{args.lr}_aug_{args.aug_ratio}_new_aug"
+expr_name = f"slu_baseline_lr_{args.lr}_aug_{args.aug_ratio}_test"
 print("[EXPRIMENT] ",expr_name)
 model = SLUTagging(args).to(device)
 writer = SummaryWriter(os.path.join("logs",expr_name))
@@ -48,6 +48,7 @@ Example.word2vec.load_embeddings(model.word_embed, Example.word_vocab, device=de
 if args.testing:
     # 这里稍微修改了preload的路径
     check_point = torch.load(open(os.path.join("checkpoints",expr_name), 'rb'), map_location=device)
+    # check_point = torch.load(open(os.path.join("checkpoints","slu_baseline_lr_test"), 'rb'), map_location=device)
     model.load_state_dict(check_point['model'])
     print("Load saved model from root path")
 

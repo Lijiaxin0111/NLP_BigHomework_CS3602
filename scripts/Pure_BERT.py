@@ -46,6 +46,9 @@ writer = SummaryWriter(os.path.join("logs",expr_name))
 if args.testing:
     # 这里稍微修改了preload的路径
     check_point = torch.load(open(os.path.join("checkpoints",expr_name), 'rb'), map_location=device)
+    # check_point = torch.load(open(os.path.join("checkpoints","Pure_BERT_lr_0.001_freeze_layer_12"), 'rb'), map_location=device)
+
+
     model.load_state_dict(check_point['model'])
     print("Load saved model from root path")
 
