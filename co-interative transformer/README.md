@@ -16,7 +16,7 @@
 
 ```python my_main_joint.py```
 
-模型保存在 `./ckpt/` 下。当前该文件夹下分别保存了lr=1e-3, loss_weight=0.2，采用和未采用后纠错的两个训练好的模型。
+模型保存在 `./ckpt/` 下
 
 TensorBoard日志保存在 `./logs/` 下
 
