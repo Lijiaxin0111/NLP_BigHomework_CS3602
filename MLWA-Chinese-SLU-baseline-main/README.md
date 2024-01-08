@@ -12,7 +12,7 @@ env: python 3.7.6
 train: run
 > python train.py -ced 128 -wed 128 -ehd 512
 
-test: remove the train process and run
-> python train.py -ced 128 -wed 128 -ehd 512
 已保存的模型中，debug对应的是学习率lr=1e-3
 参数设置，可以对照train.py中的参数列表选择是否使用Bert，调整学习率，embedding维数等。
+test: remove the train process and run
+> python train.py -ced 128 -wed 128 -ehd 512
