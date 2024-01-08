@@ -9,12 +9,16 @@ env: python 3.7.6
 > - tensorboardX
 > - jieba
 
+## 数据集
+数据存放在./data/Project_data中
+
+## 参数设置
+在./train.py中可以设置数据集路径，模型存储路径以及模型参数
+<br/>
+在./test.py中可以设置数据集路径，模型路径
+## 运行
 train: run
 > python train.py -ced 128 -wed 128 -ehd 512
 
-test: remove the train process and run
-> python train.py -ced 128 -wed 128 -ehd 512
-
-<br/>
-已保存的模型中，debug对应的是学习率lr=1e-3
-参数设置，可以对照train.py中的参数列表选择是否使用Bert，调整学习率，embedding维数等。
+test: run
+> python test.py -ced 128 -wed 128 -ehd 512
