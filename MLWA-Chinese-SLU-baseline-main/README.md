@@ -22,4 +22,5 @@ train: run
 
 test: run
 > python test.py -ced 128 -wed 128 -ehd 512
+<br/>
 当前的Tensorboard日志保存在./logs中
