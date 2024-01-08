@@ -221,26 +221,16 @@ class Processor(object):
                     st_pos = i
                     ed_pos = -1
                     slot = pred_slot[i][2:]
-                    ans.append([])
                 else:
                     if (len(pred_slot[i]) >= 2):
                         if ((pred_slot[i][0] == 'I') and (pred_slot[i][1] != '-')):
                             if (ed_pos == -1):
-                                ans[tot].append(pred_intent)
-                                ans[tot].append(slot)
-                                ans[tot].append(asr[st_pos: i + 1])
-                                tot += 1
+                                ans.append(pred_intent+ '-'+slot+ '-'+asr[st_pos: i+1])
                                 ed_pos = 0
                             else:
-                                ans.append([])
-                                ans[tot].append(pred_intent)
-                                ans[tot].append(pred_slot[i][2:])
-                                ans[tot].append(asr[i: i + 1])
-                                tot += 1
+                                ans.append(pred_intent+ '-'+pred_slot[i][2:]+ '-'+asr[i: i+1])
             if (ed_pos == -1):
-                ans[tot].append(pred_intent)
-                ans[tot].append(slot)
-                ans[tot].append(asr[st_pos:])
+                ans.append(pred_intent+ '-'+slot+ '-'+asr[st_pos:])
             print(asr)
             print(pred_slot)
             print(pred_intent)
@@ -268,19 +258,22 @@ class Processor(object):
                             entry_out["asr_1best"] = entry_out["asr_1best"] + ("#" * (len(pred_slot[cnt1]) - len(entry_out["asr_1best"])))
                         entry_out["semantics"] = []
                         entry_out["pred"] = output_trans(pred_slot[cnt1], pred_intent[cnt1], entry_out["asr_1best"])
-                        tmp = entry["semantic"]
+                        tmp = []
+                        for i, triple in enumerate(entry["semantic"]):
+                            tmp.append(triple[0]+ '-'+triple[1]+ '-'+triple[2])
+                        print(entry_out["pred"])
+                        print(tmp)
                         #print("before",tmp)
-                        if (len(entry["semantic"]) < len(entry_out["pred"])):
-                            for i in range(len(entry_out["pred"]) - len(entry["semantic"])):
-                                tmp.append([])
+                        #if (len(entry["semantic"]) < len(entry_out["pred"])):
+                        #    for i in range(len(entry_out["pred"]) - len(entry["semantic"])):
+                        #        tmp.append([])
                         #print("after", tmp)
-                        for i in range(len(entry_out["pred"])):
-                            my_pred.append(entry_out["pred"][i])
-                            my_slot.append(tmp[i])
-                        for i, pred in enumerate(entry_out["pred"]):
-                            tot += 1
-                            if (len(entry["semantic"]) > i):
-                                hit += set(pred) == set(entry["semantic"][i])
+                        my_pred.append(entry_out["pred"])
+                        my_slot.append(tmp)
+                        #for i, pred in enumerate(entry_out["pred"]):
+                        #    tot += 1
+                        #    if (len(entry["semantic"]) > i):
+                        #        hit += set(pred) == set(entry["semantic"][i])
                         cnt1 += 1
                         data_out[cnt2].append(entry_out)
                     cnt2 += 1
@@ -288,7 +281,7 @@ class Processor(object):
 
         slot_f1, precision, recall = computeF1Score(my_pred, my_slot)
         #slot_acc = Evaluator.slot_accuracy(pred_slot, real_slot, pred_intent, real_intent)
-        slot_acc = hit / tot * 100
+        slot_acc = Evaluator.slot_accuracy(my_pred, my_slot)
         intent_acc = Evaluator.accuracy(pred_intent, real_intent)
         #sent_acc = Evaluator.semantic_acc(pred_slot, real_slot, pred_intent, real_intent)
 
@@ -401,17 +394,14 @@ class Evaluator(object):
         return 1.0 * correct_count / total_count
     
     @staticmethod
-    def slot_accuracy(pred_list, real_list, pred_intent, real_intent):
+    def slot_accuracy(pred_list, real_list):
         """
         Get accuracy measured by predictions and ground-trues.
         """
         corr, total = 0, 0
-        pred_array = np.array(list(Evaluator.expand_list(pred_list)))
-        real_array = np.array(list(Evaluator.expand_list(real_list)))
         for i, pred in enumerate(pred_list):
             total += 1
-            if (pred_array[i] == real_array[i]):
-                corr += set(pred) == set(real_list[i])
+            corr += set(pred) == set(real_list[i])
         print(total)
         return 100 * corr / total
         """pred_array = np.array(list(Evaluator.expand_list(pred_list)))
