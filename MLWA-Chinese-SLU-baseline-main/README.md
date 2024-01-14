@@ -16,6 +16,8 @@ env: python 3.7.6
 在./train.py中可以设置数据集路径，模型存储路径以及模型参数
 <br/>
 在./test.py中可以设置数据集路径，模型路径
+<br/>
+在./process.py line363可以选择是否使用后纠错以及后纠错参数
 ## 运行
 train: run
 > python train.py -ced 128 -wed 128 -ehd 512
