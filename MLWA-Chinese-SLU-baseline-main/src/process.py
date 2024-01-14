@@ -13,7 +13,7 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
-
+from premodified import modified_pred
 from transformers import AdamW, get_linear_schedule_with_warmup
 from tensorboardX import SummaryWriter
 import os
@@ -87,7 +87,7 @@ class Processor(object):
                         word_items=[(batch[2], False), (batch[6], False)]
                     )
                 sorted_intent = list(Evaluator.expand_list(sorted_char_items[1]))
-
+                #print(padded_char_text)
                 if self.__dataset.use_bert_input:
                     char_text_var = [
                         torch.tensor(sorted_char_items[3], dtype=torch.long),
@@ -138,7 +138,7 @@ class Processor(object):
             time_con = time.time() - time_start
             print('[Epoch {:2d}]: The total slot loss on train data is {:2.6f}, intent data is {:2.6f}, '
                   'cost about {:2.6} seconds.'.format(epoch, total_slot_loss, total_intent_loss, time_con))
-            writer = SummaryWriter("logs/lr=1e-4")
+            writer = SummaryWriter("logs/replay_lr=1e-3")
             writer.add_scalar("Slot_loss", total_slot_loss, epoch)
             writer.add_scalar("Intent_loss", total_intent_loss, epoch)
             """plt.plot(total_slot_loss, label ='total_slot_loss')#画出val_acc数据
@@ -196,27 +196,15 @@ class Processor(object):
             pred_slot, real_slot, pred_intent, real_intent = self.prediction(
                 self.__model, self.__dataset, "test", test_batch
             )
-
-        slot_f1, precision, recall = computeF1Score(pred_slot, real_slot)
-        slot_acc = Evaluator.slot_accuracy(pred_slot, real_slot, pred_intent, real_intent)
-        intent_acc = Evaluator.accuracy(pred_intent, real_intent)
-        #sent_acc = Evaluator.semantic_acc(pred_slot, real_slot, pred_intent, real_intent)
-
-        return slot_acc, slot_f1, precision, recall, intent_acc
-
-    @staticmethod
-    def validate(model, dataset, batch_size):
-        """
-        validation will write mistaken samples to files and make scores.
-        """
-        pred_slot, real_slot, pred_intent, real_intent = Processor.prediction(model, dataset, "test", batch_size)
         def output_trans(pred_slot, pred_intent, asr):
             ans = []
             st_pos = 0
             ed_pos = 0
             tot = 0
             slot = "NULL"
-            for i in range(len(asr)):
+            #print("asr",asr)
+            #print("pred_slot",pred_slot)
+            for i in range(min(len(pred_slot), len(asr))):
                 if(pred_slot[i][0] == 'B'):
                     st_pos = i
                     ed_pos = -1
@@ -228,13 +216,13 @@ class Processor(object):
                                 ans.append(pred_intent+ '-'+slot+ '-'+asr[st_pos: i+1])
                                 ed_pos = 0
                             else:
-                                ans.append(pred_intent+ '-'+pred_slot[i][2:]+ '-'+asr[i: i+1])
+                                ans.append(pred_intent+ '-'+pred_slot[i][1:]+ '-'+asr[i: i+1])
             if (ed_pos == -1):
                 ans.append(pred_intent+ '-'+slot+ '-'+asr[st_pos:])
-            print(asr)
-            print(pred_slot)
-            print(pred_intent)
-            print(ans)
+            #print(asr)
+            #print(pred_slot)
+            #print(pred_intent)
+            #print(ans)
             return ans
 
         with open('data/Project_data/test_out.json','w',encoding='utf-8') as file_out:
@@ -258,11 +246,13 @@ class Processor(object):
                             entry_out["asr_1best"] = entry_out["asr_1best"] + ("#" * (len(pred_slot[cnt1]) - len(entry_out["asr_1best"])))
                         entry_out["semantics"] = []
                         entry_out["pred"] = output_trans(pred_slot[cnt1], pred_intent[cnt1], entry_out["asr_1best"])
+                        for i, triple in enumerate(entry_out["pred"]):
+                            entry_out["pred"][i] = triple.replace('#','')
                         tmp = []
                         for i, triple in enumerate(entry["semantic"]):
                             tmp.append(triple[0]+ '-'+triple[1]+ '-'+triple[2])
-                        print(entry_out["pred"])
-                        print(tmp)
+                        #print(entry_out["pred"])
+                        #print(tmp)
                         #print("before",tmp)
                         #if (len(entry["semantic"]) < len(entry_out["pred"])):
                         #    for i in range(len(entry_out["pred"]) - len(entry["semantic"])):
@@ -278,7 +268,99 @@ class Processor(object):
                         data_out[cnt2].append(entry_out)
                     cnt2 += 1
                 json.dump(data_out, file_out, indent=2, ensure_ascii=False)
+        #my_pred = modified_pred(my_pred,distance= 'jac', pinyin= True)
+        slot_f1, precision, recall = computeF1Score(my_pred, my_slot)
+        #slot_acc = Evaluator.slot_accuracy(pred_slot, real_slot, pred_intent, real_intent)
+        slot_acc = Evaluator.slot_accuracy(my_pred, my_slot)
+        intent_acc = Evaluator.accuracy(pred_intent, real_intent)
+        #sent_acc = Evaluator.semantic_acc(pred_slot, real_slot, pred_intent, real_intent)
 
+        return slot_acc, slot_f1, precision, recall, intent_acc
+        #slot_f1, precision, recall = computeF1Score(pred_slot, real_slot)
+        #slot_acc = Evaluator.slot_accuracy(pred_slot, real_slot, pred_intent, real_intent)
+        #intent_acc = Evaluator.accuracy(pred_intent, real_intent)
+        #sent_acc = Evaluator.semantic_acc(pred_slot, real_slot, pred_intent, real_intent)
+
+        #return slot_acc, slot_f1, precision, recall, intent_acc
+
+    @staticmethod
+    def validate(model, dataset, batch_size):
+        """
+        validation will write mistaken samples to files and make scores.
+        """
+        pred_slot, real_slot, pred_intent, real_intent = Processor.prediction(model, dataset, "test", batch_size)
+        def output_trans(pred_slot, pred_intent, asr):
+            ans = []
+            st_pos = 0
+            ed_pos = 0
+            tot = 0
+            slot = "NULL"
+            for i in range(min(len(pred_slot), len(asr))):
+                if(pred_slot[i][0] == 'B'):
+                    st_pos = i
+                    ed_pos = -1
+                    slot = pred_slot[i][2:]
+                else:
+                    if (len(pred_slot[i]) >= 2):
+                        if ((pred_slot[i][0] == 'I') and (pred_slot[i][1] != '-')):
+                            if (ed_pos == -1):
+                                ans.append(pred_intent+ '-'+slot+ '-'+asr[st_pos: i+1])
+                                ed_pos = 0
+                            else:
+                                ans.append(pred_intent+ '-'+pred_slot[i][1:]+ '-'+asr[i: i+1])
+            if (ed_pos == -1):
+                ans.append(pred_intent+ '-'+slot+ '-'+asr[st_pos:])
+            #print(asr)
+            #print(pred_slot)
+            #print(pred_intent)
+            #print(ans)
+            return ans
+
+        with open('data/Project_data/test_out.json','w',encoding='utf-8') as file_out:
+            with open('data/Project_data/test.json','r', encoding='utf-8') as file:
+                data = json.load(file)
+                cnt1 = 0
+                cnt2 = 0
+                hit = 0
+                tot = 0
+                data_out = []
+                my_pred = []
+                my_slot = []
+                for items in data:
+                    data_out.append([])
+                    for entry in items:
+                        entry_out = {}
+                        entry_out["utt_id"] = entry["utt_id"]
+                        #entry_out["manual_transcript"] = entry["manual_transcript"]
+                        entry_out["asr_1best"] = entry["asr_1best"]
+                        if (len(entry_out["asr_1best"]) < len(pred_slot[cnt1])):
+                            entry_out["asr_1best"] = entry_out["asr_1best"] + ("#" * (len(pred_slot[cnt1]) - len(entry_out["asr_1best"])))
+                        entry_out["semantics"] = []
+                        entry_out["pred"] = output_trans(pred_slot[cnt1], pred_intent[cnt1], entry_out["asr_1best"])
+                        print(entry_out["pred"])
+                        for i, triple in enumerate(entry_out["pred"]):
+                            entry_out["pred"][i] = triple.replace('#','')
+                        tmp = []
+                        for i, triple in enumerate(entry["semantic"]):
+                            tmp.append(triple[0]+ '-'+triple[1]+ '-'+triple[2])
+                        #print(entry_out["pred"])
+                        #print(tmp)
+                        #print("before",tmp)
+                        #if (len(entry["semantic"]) < len(entry_out["pred"])):
+                        #    for i in range(len(entry_out["pred"]) - len(entry["semantic"])):
+                        #        tmp.append([])
+                        #print("after", tmp)
+                        my_pred.append(entry_out["pred"])
+                        my_slot.append(tmp)
+                        #for i, pred in enumerate(entry_out["pred"]):
+                        #    tot += 1
+                        #    if (len(entry["semantic"]) > i):
+                        #        hit += set(pred) == set(entry["semantic"][i])
+                        cnt1 += 1
+                        data_out[cnt2].append(entry_out)
+                    cnt2 += 1
+                json.dump(data_out, file_out, indent=2, ensure_ascii=False)
+        #my_pred = modified_pred(my_pred,distance= 'jac', pinyin= False)
         slot_f1, precision, recall = computeF1Score(my_pred, my_slot)
         #slot_acc = Evaluator.slot_accuracy(pred_slot, real_slot, pred_intent, real_intent)
         slot_acc = Evaluator.slot_accuracy(my_pred, my_slot)
@@ -371,7 +453,10 @@ class Processor(object):
         save_slu_error_result(pred_slot, real_slot, pred_intent, real_intent, [char_text, word_text], dataset.save_dir, mode)
         # save slu result
         save_slu_result(pred_slot, real_slot, pred_intent, real_intent, [char_text, word_text], dataset.save_dir, mode)
-
+        #print("pred_slot: ", len(pred_slot), pred_slot)
+        #print("real_slot: ", len(real_slot), real_slot)
+        #print("pred_intent: ", len(pred_intent), pred_intent)
+        #print("real_intent: ", len(real_intent), real_intent)
         return pred_slot, real_slot, pred_intent, real_intent
 
 
