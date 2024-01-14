@@ -22,7 +22,7 @@ import json
 from transformers import BertTokenizer
 
 from src.data_loader.word_trie import Word_Trie
-
+from utils.data_augment import data_augment_example
 from src.data_loader import functions
 
 
@@ -594,6 +594,12 @@ class DatasetManager(object):
             return ret
         with open(file_path, 'r', encoding='utf-8') as fr:
             data = json.load(fr)
+            examples = []
+            """for di, data1 in enumerate(data):
+                for ui, utt in enumerate(data1):
+                    #print(data_augment_example(utt))
+                    examples.append(data_augment_example(utt))
+            new_dataset = convert_dataset(examples)"""
             new_dataset = ""
             for items in data:
                 new_dataset += convert_dataset(items)
@@ -669,7 +675,6 @@ class DatasetManager(object):
 
         dataset = NewTorchDataset(char_text, word_text, align_info, slot, intent, word_list, sent_seg,
                                   bert_input_id, bert_attention_mask, bert_token_type)
-
         return DataLoader(dataset, batch_size=batch_size, shuffle=shuffle, collate_fn=self.__collate_fn)
 
     @staticmethod
@@ -719,7 +724,8 @@ class DatasetManager(object):
                             item[-1].extend([0] * (word_max_len - word_len_list[index]))
                         else:
                             item[-1].extend(['<PAD>'] * (word_max_len - word_len_list[index]))
-
+        #print("char_items", char_items)
+        #print("word_items", word_items)
         if char_items is not None and word_items is not None:
             return trans_char_texts, trans_word_texts, trans_char_items, trans_word_items, char_seq_lens, word_seq_lens, sorted_index
         elif char_items is not None:
@@ -741,5 +747,5 @@ class DatasetManager(object):
         for idx in range(0, len(batch)):
             for jdx in range(0, n_entity):
                 modified_batch[jdx].append(batch[idx][jdx])
-
+        #print("modified_batch", modified_batch)
         return modified_batch
